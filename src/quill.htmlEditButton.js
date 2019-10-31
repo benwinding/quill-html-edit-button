@@ -1,79 +1,71 @@
 class htmlEditButton {
   constructor(quill, options) {
-    this.quill = quill;
-    this.options = options;
-    this.range = null;
-    this.debug = options.debug == null || options.debug == true;
-
-    warnAboutOptions(options);
-
-    var toolbar = this.quill.getModule("toolbar");
-    toolbar.addHandler("image", this.selectLocalImage.bind(this));
-  }
-
-  selectLocalImage() {
-    this.range = this.quill.getSelection();
-    this.fileHolder = document.createElement("input");
-    this.fileHolder.setAttribute("type", "file");
-    this.fileHolder.setAttribute("accept", "image/*");
-    this.fileHolder.setAttribute("style", "visibility:hidden");
-
-    this.fileHolder.onchange = this.fileChanged.bind(this);
-
-    document.body.appendChild(this.fileHolder);
-
-    this.fileHolder.click();
-
-    window.requestAnimationFrame(() => {
-      document.body.removeChild(this.fileHolder);
+    document.querySelectorAll(".ql-toolbar").forEach(toolbarEl => {
+      console.log({ toolbarEl });
+      const buttonContainer = document.createElement("span");
+      buttonContainer.setAttribute("class", "ql-formats");
+      const button = document.createElement("button");
+      button.innerHTML = "<strong>HTML</strong>";
+      button.onclick = function() {
+        launchPopupEditor(quill);
+      };
+      buttonContainer.appendChild(button);
+      toolbarEl.appendChild(buttonContainer);
     });
   }
+}
 
-  fileChanged() {
-    const file = this.fileHolder.files[0];
-    if (!file) {
-      return;
-    }
+function launchPopupEditor(quill) {
+  const htmlFromEditor = quill.container.querySelector(".ql-editor").innerHTML;
+  console.log("onClickHtmlButton", { htmlFromEditor });
 
-    const fileReader = new FileReader();
+  const popupContainer = document.createElement("div");
+  const overlayContainer = document.createElement("div");
+  overlayContainer.setAttribute(
+    "style",
+    "background: #0000007d; position: fixed; top: 0; left: 0; right: 0; bottom: 0;"
+  );
+  popupContainer.setAttribute(
+    "style",
+    "background: #ddd; position: absolute; top: 5%; left: 5%; right: 5%; bottom: 5%; border-radius: 10px;"
+  );
+  const title = document.createElement("i");
+  title.setAttribute('style', 'margin: 0; display: block;')
+  title.innerText =
+    "Edit HTML here, when you click \"OK\" the quill editor's contents will be replaced";
+  const textContainer = document.createElement("div");
+  textContainer.appendChild(title);
+  textContainer.setAttribute(
+    "style",
+    "position: relative; width: calc(100% - 40px); height: calc(100% - 40px); padding: 20px;"
+  );
+  const textArea = document.createElement("textarea");
+  textArea.setAttribute(
+    "style",
+    "position: absolute; width: calc(100% - 45px); height: calc(100% - 116px);"
+  );
+  textArea.innerText = htmlFromEditor;
+  const buttonCancel = document.createElement("button")
+  buttonCancel.innerHTML = "Cancel";
+  buttonCancel.setAttribute('style', 'margin-right: 20px;');
+  const buttonOk = document.createElement("button")
+  buttonOk.innerHTML = "Ok";
+  const buttonGroup = document.createElement("div");
+  buttonGroup.setAttribute('style', 'position: absolute; bottom: 20px; transform: scale(1.5); left: calc(50% - 60px)')
+  buttonGroup.appendChild(buttonCancel);
+  buttonGroup.appendChild(buttonOk);
+  textContainer.appendChild(textArea);
+  textContainer.appendChild(buttonGroup);
+  popupContainer.appendChild(textContainer);
+  overlayContainer.appendChild(popupContainer);
+  document.body.appendChild(overlayContainer);
 
-    fileReader.addEventListener(
-      "load",
-      async () => {
-        const base64ImageSrc = fileReader.result;
-        const base64ImageSrcNew = await downscaleImage(
-          base64ImageSrc,
-          this.options.maxWidth,
-          this.options.imageType,
-          this.options.quality,
-          this.debug
-        );
-        this.insertToEditor(base64ImageSrcNew);
-      },
-      false
-    );
-    fileReader.readAsDataURL(file);
+  buttonCancel.onclick = function () {
+    document.body.removeChild(overlayContainer);
   }
-
-  insertToEditor(url) {
-    const range = this.range;
-    // Insert the compressed image
-    this.logFileSize(url);
-    this.quill.insertEmbed(range.index, "image", `${url}`);
-    // Move cursor to next position
-    range.index++;
-    this.quill.setSelection(range, "api");
-  }
-
-  logFileSize(dataUrl) {
-    const head = "data:image/png;base64,";
-    const fileSizeBytes = Math.round(((dataUrl.length - head.length) * 3) / 4);
-    const fileSizeKiloBytes = (fileSizeBytes / 1024).toFixed(0);
-    if (this.debug) {
-      console.log(
-        "quill.htmlEditButton: estimated img size: " + fileSizeKiloBytes + " kb"
-      );
-    }
+  buttonOk.onclick = function () {
+    quill.container.querySelector(".ql-editor").innerHTML = textArea.value;
+    document.body.removeChild(overlayContainer);
   }
 }
 
