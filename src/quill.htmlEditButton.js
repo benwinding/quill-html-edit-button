@@ -62,6 +62,10 @@ function launchPopupEditor(quill) {
     document.body.removeChild(overlayContainer);
   }
   overlayContainer.onclick = buttonCancel.onclick;
+  popupContainer.onclick = function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  };
   buttonOk.onclick = function () {
     quill.container.querySelector(".ql-editor").innerHTML = textArea.value;
     document.body.removeChild(overlayContainer);
