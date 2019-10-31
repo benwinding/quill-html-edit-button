@@ -1,7 +1,7 @@
 class htmlEditButton {
   constructor(quill, options) {
+    // Add button to all quill toolbar instances
     document.querySelectorAll(".ql-toolbar").forEach(toolbarEl => {
-      console.log({ toolbarEl });
       const buttonContainer = document.createElement("span");
       buttonContainer.setAttribute("class", "ql-formats");
       const button = document.createElement("button");
@@ -17,8 +17,6 @@ class htmlEditButton {
 
 function launchPopupEditor(quill) {
   const htmlFromEditor = quill.container.querySelector(".ql-editor").innerHTML;
-  console.log("onClickHtmlButton", { htmlFromEditor });
-
   const popupContainer = document.createElement("div");
   const overlayContainer = document.createElement("div");
   overlayContainer.setAttribute(
@@ -63,6 +61,7 @@ function launchPopupEditor(quill) {
   buttonCancel.onclick = function () {
     document.body.removeChild(overlayContainer);
   }
+  overlayContainer.onclick = buttonCancel.onclick;
   buttonOk.onclick = function () {
     quill.container.querySelector(".ql-editor").innerHTML = textArea.value;
     document.body.removeChild(overlayContainer);
