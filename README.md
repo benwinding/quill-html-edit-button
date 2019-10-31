@@ -9,7 +9,7 @@
 
 <!-- [END badges] -->
 
-Quill.js Module which compresses images that are uploaded to the editor
+Quill.js Module which allows you to quickly view/edit the HTML in the editor
 
 ## Install
 
@@ -17,35 +17,19 @@ Quill.js Module which compresses images that are uploaded to the editor
 
 ## Quickstart
 
-```js
-import ImageCompress from "quill-html-edit-button";
+``` js
+import htmlEditButton from "./quill.htmlEditButton.js";
 
-Quill.register("modules/imageCompress", ImageCompress);
+Quill.register("modules/htmlEditButton", htmlEditButton);
 
 const quill = new Quill(editor, {
   // ...
   modules: {
     // ...
-    imageCompress: {
-      quality: 0.7, // default
-      maxWidth: 1000, // default
-      imageType: "image/jpeg", // default
-      debug: true // default
-    }
+    htmlEditButton: {}
   }
 });
 ```
-
-## Options
-
-- **maxWidth**
-  - Maximum width of images (in pixels)
-- **quality**
-  - Image quality range: 0.0 - 1.0
-- **imageType**
-  - Values: 'image/jpeg' , 'image/png' ... etc
-- **debug**
-  - Displays console logs: true/false
 
 ## Thanks
 
