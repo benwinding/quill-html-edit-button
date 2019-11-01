@@ -20,7 +20,7 @@ Quill.js Module which allows you to quickly view/edit the HTML in the editor
 ## Quickstart
 
 ``` js
-import htmlEditButton from "./quill.htmlEditButton.js";
+import { htmlEditButton } from "./quill.htmlEditButton.js";
 
 Quill.register("modules/htmlEditButton", htmlEditButton);
 
@@ -33,6 +33,21 @@ const quill = new Quill(editor, {
 });
 ```
 
+## Quickstart (script tag)
+
+``` html
+    <script src="/dist/quill.htmlEditButton.min.js"></script>
+    <script>
+      Quill.register("modules/htmlEditButton", htmlEditButton);
+      const quill = new Quill(editor, {
+        // ...
+        modules: {
+          // ...
+          htmlEditButton: {}
+        }
+      });
+    </script>
+```
 ## Thanks
 
 This project is based on [quill-image-uploader](https://github.com/NoelOConnell/quill-image-uploader), thanks mate!

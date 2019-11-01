@@ -76,4 +76,5 @@ function launchPopupEditor(quill) {
 }
 
 window.htmlEditButton = htmlEditButton;
+export default htmlEditButton;
 export { htmlEditButton };
