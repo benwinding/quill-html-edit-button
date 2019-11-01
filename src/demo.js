@@ -1,5 +1,5 @@
 import Quill from "quill";
-import htmlEditButton from "./quill.htmlEditButton.js";
+import { htmlEditButton } from "./quill.htmlEditButton";
 
 Quill.register("modules/htmlEditButton", htmlEditButton);
 

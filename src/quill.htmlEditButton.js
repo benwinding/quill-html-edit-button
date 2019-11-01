@@ -28,9 +28,9 @@ function launchPopupEditor(quill) {
     "background: #ddd; position: absolute; top: 5%; left: 5%; right: 5%; bottom: 5%; border-radius: 10px;"
   );
   const title = document.createElement("i");
-  title.setAttribute('style', 'margin: 0; display: block;')
+  title.setAttribute("style", "margin: 0; display: block;");
   title.innerText =
-    "Edit HTML here, when you click \"OK\" the quill editor's contents will be replaced";
+    'Edit HTML here, when you click "OK" the quill editor\'s contents will be replaced';
   const textContainer = document.createElement("div");
   textContainer.appendChild(title);
   textContainer.setAttribute(
@@ -43,13 +43,16 @@ function launchPopupEditor(quill) {
     "position: absolute; width: calc(100% - 45px); height: calc(100% - 116px);"
   );
   textArea.innerText = htmlFromEditor;
-  const buttonCancel = document.createElement("button")
+  const buttonCancel = document.createElement("button");
   buttonCancel.innerHTML = "Cancel";
-  buttonCancel.setAttribute('style', 'margin-right: 20px;');
-  const buttonOk = document.createElement("button")
+  buttonCancel.setAttribute("style", "margin-right: 20px;");
+  const buttonOk = document.createElement("button");
   buttonOk.innerHTML = "Ok";
   const buttonGroup = document.createElement("div");
-  buttonGroup.setAttribute('style', 'position: absolute; bottom: 20px; transform: scale(1.5); left: calc(50% - 60px)')
+  buttonGroup.setAttribute(
+    "style",
+    "position: absolute; bottom: 20px; transform: scale(1.5); left: calc(50% - 60px)"
+  );
   buttonGroup.appendChild(buttonCancel);
   buttonGroup.appendChild(buttonOk);
   textContainer.appendChild(textArea);
@@ -58,18 +61,19 @@ function launchPopupEditor(quill) {
   overlayContainer.appendChild(popupContainer);
   document.body.appendChild(overlayContainer);
 
-  buttonCancel.onclick = function () {
+  buttonCancel.onclick = function() {
     document.body.removeChild(overlayContainer);
-  }
+  };
   overlayContainer.onclick = buttonCancel.onclick;
-  popupContainer.onclick = function (e) {
+  popupContainer.onclick = function(e) {
     e.preventDefault();
     e.stopPropagation();
   };
-  buttonOk.onclick = function () {
+  buttonOk.onclick = function() {
     quill.container.querySelector(".ql-editor").innerHTML = textArea.value;
     document.body.removeChild(overlayContainer);
-  }
+  };
 }
 
-export default htmlEditButton;
+window.htmlEditButton = htmlEditButton;
+export { htmlEditButton };

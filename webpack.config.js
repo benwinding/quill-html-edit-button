@@ -43,12 +43,6 @@ module.exports = [
           }
         }
       ]
-    },
-    plugins: [
-      new UglifyJSPlugin({
-        extractComments: true
-      }),
-      new ExtractTextPlugin("quill.htmlEditButton.min.css")
-    ]
+    }
   }
 ];
