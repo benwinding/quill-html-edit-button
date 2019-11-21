@@ -1,7 +1,7 @@
 class htmlEditButton {
   constructor(quill, options) {
     // Add button to all quill toolbar instances
-    document.querySelectorAll(".ql-toolbar").forEach(toolbarEl => {
+    quill.container.parentElement.querySelectorAll(".ql-toolbar").forEach(toolbarEl => {
       const buttonContainer = document.createElement("span");
       buttonContainer.setAttribute("class", "ql-formats");
       const button = document.createElement("button");
