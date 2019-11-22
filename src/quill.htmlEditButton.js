@@ -7,7 +7,8 @@ class htmlEditButton {
       const button = document.createElement("button");
       button.innerHTML = "&lt;&gt;";
       button.title = "Show HTML source";
-      button.onclick = function() {
+      button.onclick = function (e) {
+        e.preventDefault(); 
         launchPopupEditor(quill);
       };
       buttonContainer.appendChild(button);
@@ -41,7 +42,7 @@ function launchPopupEditor(quill) {
   const textArea = document.createElement("textarea");
   textArea.setAttribute(
     "style",
-    "position: absolute; width: calc(100% - 45px); height: calc(100% - 116px);"
+    "position: absolute; left:15px; width: calc(100% - 45px); height: calc(100% - 116px);"
   );
   textArea.innerText = htmlFromEditor;
   const buttonCancel = document.createElement("button");
