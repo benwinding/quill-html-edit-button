@@ -6,6 +6,7 @@ class htmlEditButton {
       buttonContainer.setAttribute("class", "ql-formats");
       const button = document.createElement("button");
       button.innerHTML = "&lt;&gt;";
+      button.title = "Show HTML source";
       button.onclick = function() {
         launchPopupEditor(quill);
       };
