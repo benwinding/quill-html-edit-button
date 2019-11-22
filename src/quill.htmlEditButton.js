@@ -1,19 +1,21 @@
 class htmlEditButton {
   constructor(quill, options) {
     // Add button to all quill toolbar instances
-    quill.container.parentElement.querySelectorAll(".ql-toolbar").forEach(toolbarEl => {
-      const buttonContainer = document.createElement("span");
-      buttonContainer.setAttribute("class", "ql-formats");
-      const button = document.createElement("button");
-      button.innerHTML = "&lt;&gt;";
-      button.title = "Show HTML source";
-      button.onclick = function (e) {
-        e.preventDefault(); 
-        launchPopupEditor(quill);
-      };
-      buttonContainer.appendChild(button);
-      toolbarEl.appendChild(buttonContainer);
-    });
+    quill.container.parentElement
+      .querySelectorAll(".ql-toolbar")
+      .forEach(toolbarEl => {
+        const buttonContainer = document.createElement("span");
+        buttonContainer.setAttribute("class", "ql-formats");
+        const button = document.createElement("button");
+        button.innerHTML = "&lt;&gt;";
+        button.title = "Show HTML source";
+        button.onclick = function(e) {
+          e.preventDefault();
+          launchPopupEditor(quill);
+        };
+        buttonContainer.appendChild(button);
+        toolbarEl.appendChild(buttonContainer);
+      });
   }
 }
 
@@ -44,7 +46,7 @@ function launchPopupEditor(quill) {
     "style",
     "position: absolute; left:15px; width: calc(100% - 45px); height: calc(100% - 116px);"
   );
-  textArea.innerText = htmlFromEditor;
+  textArea.value = formatHTML(htmlFromEditor);
   const buttonCancel = document.createElement("button");
   buttonCancel.innerHTML = "Cancel";
   buttonCancel.setAttribute("style", "margin-right: 20px;");
@@ -72,9 +74,57 @@ function launchPopupEditor(quill) {
     e.stopPropagation();
   };
   buttonOk.onclick = function() {
-    quill.container.querySelector(".ql-editor").innerHTML = textArea.value;
+    const noNewlines = textArea.value.replace(/\r?\n/g, '');
+    quill.container.querySelector(".ql-editor").innerHTML = noNewlines;
     document.body.removeChild(overlayContainer);
   };
+}
+
+// Adapted FROM jsfiddle here: https://jsfiddle.net/buksy/rxucg1gd/
+function formatHTML(code) {
+  "use strict";
+  let stripWhiteSpaces = true;
+  let stripEmptyLines = true;
+  const whitespace = " ".repeat(2); // Default indenting 4 whitespaces
+  let currentIndent = 0;
+  const newlineChar = "\n";
+  let char = null;
+  let nextChar = null;
+
+  let result = "";
+  for (let pos = 0; pos <= code.length; pos++) {
+    char = code.substr(pos, 1);
+    nextChar = code.substr(pos + 1, 1);
+
+    // If opening tag, add newline character and indention
+    if (char === "<" && nextChar !== "/") {
+      result += newlineChar + whitespace.repeat(currentIndent);
+      currentIndent++;
+    }
+    // if Closing tag, add newline and indention
+    else if (char === "<" && nextChar === "/") {
+      // If there're more closing tags than opening
+      if (--currentIndent < 0) currentIndent = 0;
+      result += newlineChar + whitespace.repeat(currentIndent);
+    }
+
+    // remove multiple whitespaces
+    else if (stripWhiteSpaces === true && char === " " && nextChar === " ")
+      char = "";
+    // remove empty lines
+    else if (stripEmptyLines === true && char === newlineChar) {
+      //debugger;
+      if (code.substr(pos, code.substr(pos).indexOf("<")).trim() === "")
+        char = "";
+    }
+
+    result += char;
+  }
+  console.log("formatHTML", {
+    before: code,
+    after: result,
+  });
+  return result;
 }
 
 window.htmlEditButton = htmlEditButton;
