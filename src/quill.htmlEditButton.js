@@ -5,7 +5,7 @@ class htmlEditButton {
       const buttonContainer = document.createElement("span");
       buttonContainer.setAttribute("class", "ql-formats");
       const button = document.createElement("button");
-      button.innerHTML = "<strong>HTML</strong>";
+      button.innerHTML = "&lt;&gt;";
       button.onclick = function() {
         launchPopupEditor(quill);
       };
