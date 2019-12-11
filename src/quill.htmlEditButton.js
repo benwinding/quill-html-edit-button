@@ -74,7 +74,8 @@ function launchPopupEditor(quill) {
     e.stopPropagation();
   };
   buttonOk.onclick = function() {
-    const noNewlines = textArea.value.replace(/\r?\n/g, '');
+    const output = textArea.value.split(/\r?\n/g).map(el => el.trim());
+    const noNewlines = output.join("");
     quill.container.querySelector(".ql-editor").innerHTML = noNewlines;
     document.body.removeChild(overlayContainer);
   };
@@ -96,13 +97,22 @@ function formatHTML(code) {
     char = code.substr(pos, 1);
     nextChar = code.substr(pos + 1, 1);
 
-    // If opening tag, add newline character and indention
-    if (char === "<" && nextChar !== "/") {
+    const isBrTag = code.substr(pos, 4) === "<br>";
+    const isOpeningTag = char === "<" && nextChar !== "/" && !isBrTag;
+    const isClosingTag = char === "<" && nextChar === "/" && !isBrTag;
+    if (isBrTag) {
+      // If opening tag, add newline character and indention
+      result += newlineChar;
+      currentIndent--;
+      pos += 4;
+    }
+    if (isOpeningTag) {
+      // If opening tag, add newline character and indention
       result += newlineChar + whitespace.repeat(currentIndent);
       currentIndent++;
     }
     // if Closing tag, add newline and indention
-    else if (char === "<" && nextChar === "/") {
+    else if (isClosingTag) {
       // If there're more closing tags than opening
       if (--currentIndent < 0) currentIndent = 0;
       result += newlineChar + whitespace.repeat(currentIndent);
@@ -122,7 +132,7 @@ function formatHTML(code) {
   }
   console.log("formatHTML", {
     before: code,
-    after: result,
+    after: result
   });
   return result;
 }
