@@ -18,6 +18,6 @@ var quill = new Quill("#editor", {
     toolbar: {
       container: fullToolbarOptions
     },
-    htmlEditButton: {}
+    htmlEditButton: { debug: true }
   }
 });

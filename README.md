@@ -51,6 +51,18 @@ const quill = new Quill(editor, {
       });
     </script>
 ```
+
+## Options
+
+``` js
+modules: {
+  // ...
+  htmlEditButton: {
+    debug: true // logging, default:false
+  }
+}
+```
+
 ## Thanks
 
 This project is based on [quill-image-uploader](https://github.com/NoelOConnell/quill-image-uploader), thanks mate!
