@@ -6,39 +6,36 @@ let debug = false;
 const Logger = {
   prefixString() {
     return `</> quill-html-edit-button: `;
-  },  
+  },
   get log() {
     if (!debug) {
       return (...any) => {};
     }
-    const boundLogFn = console.log.bind(
-      console,
-      this.prefixString()
-    );
+    const boundLogFn = console.log.bind(console, this.prefixString());
     return boundLogFn;
   }
-}
+};
 
 class htmlEditButton {
   constructor(quill, options) {
-    debug = options && options.debug
-    Logger.log('logging enabled');
+    debug = options && options.debug;
+    Logger.log("logging enabled");
     // Add button to all quill toolbar instances
-    quill.container.parentElement
-      .querySelectorAll(".ql-toolbar")
-      .forEach(toolbarEl => {
-        const buttonContainer = $create("span");
-        buttonContainer.setAttribute("class", "ql-formats");
-        const button = $create("button");
-        button.innerHTML = "&lt;&gt;";
-        button.title = "Show HTML source";
-        button.onclick = function(e) {
-          e.preventDefault();
-          launchPopupEditor(quill);
-        };
-        buttonContainer.appendChild(button);
-        toolbarEl.appendChild(buttonContainer);
-      });
+    let toolbars = quill.container.parentElement.querySelectorAll(".ql-toolbar");
+    toolbars = [].slice.call(toolbars);
+    toolbars.forEach(toolbarEl => {
+      const buttonContainer = $create("span");
+      buttonContainer.setAttribute("class", "ql-formats");
+      const button = $create("button");
+      button.innerHTML = "&lt;&gt;";
+      button.title = "Show HTML source";
+      button.onclick = function(e) {
+        e.preventDefault();
+        launchPopupEditor(quill);
+      };
+      buttonContainer.appendChild(button);
+      toolbarEl.appendChild(buttonContainer);
+    });
   }
 }
 
