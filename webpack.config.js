@@ -10,29 +10,20 @@ module.exports = [
     output: {
       filename: "[name].min.js",
       path: path.resolve(__dirname, "dist"),
-      publicPath: "/dist/",
+      publicPath: "/dist/"
     },
     devServer: {
-      contentBase: './src',
+      contentBase: "./src"
     },
     externals: {
       quill: "Quill"
     },
-    devtool: 'inline-source-map',
+    devtool: "inline-source-map",
     module: {
       rules: [
         {
           test: /\.css$/,
-          use: ExtractTextPlugin.extract({
-            use: [
-              {
-                loader: "css-loader",
-                options: {
-                  minimize: true
-                }
-              }
-            ]
-          })
+          use: ["style-loader", "css-loader"]
         },
         {
           test: /\.js$/,

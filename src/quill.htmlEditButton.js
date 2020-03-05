@@ -1,5 +1,10 @@
+import './styles.css';
+
 function $create(elName) {
   return document.createElement(elName);
+}
+function $setAttr(el, key, value) {
+  return el.setAttribute(key, value);
 }
 
 let debug = false;
@@ -21,11 +26,13 @@ class htmlEditButton {
     debug = options && options.debug;
     Logger.log("logging enabled");
     // Add button to all quill toolbar instances
-    let toolbars = quill.container.parentElement.querySelectorAll(".ql-toolbar");
+    let toolbars = quill.container.parentElement.querySelectorAll(
+      ".ql-toolbar"
+    );
     toolbars = [].slice.call(toolbars);
     toolbars.forEach(toolbarEl => {
       const buttonContainer = $create("span");
-      buttonContainer.setAttribute("class", "ql-formats");
+      $setAttr(buttonContainer, "class", "ql-formats");
       const button = $create("button");
       button.innerHTML = "&lt;&gt;";
       button.title = "Show HTML source";
@@ -43,40 +50,27 @@ function launchPopupEditor(quill) {
   const htmlFromEditor = quill.container.querySelector(".ql-editor").innerHTML;
   const popupContainer = $create("div");
   const overlayContainer = $create("div");
-  overlayContainer.setAttribute(
-    "style",
-    "background: #0000007d; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9999;"
-  );
-  popupContainer.setAttribute(
-    "style",
-    "background: #ddd; position: absolute; top: 5%; left: 5%; right: 5%; bottom: 5%; border-radius: 10px;"
-  );
-  const title = $create("i");
-  title.setAttribute("style", "margin: 0; display: block;");
-  title.innerText =
-    'Edit HTML here, when you click "OK" the quill editor\'s contents will be replaced';
+  $setAttr(overlayContainer, "class", "ql-html-overlayContainer");
+  $setAttr(popupContainer, "class", "ql-html-popupContainer");
+  const popupTitle = $create("i");
+  $setAttr(popupTitle, "class", "ql-html-popupTitle");
+  popupTitle.innerText =
+    'Edit HTML here, when you click "OK" ' +
+    "the quill editor's contents will be replaced";
   const textContainer = $create("div");
-  textContainer.appendChild(title);
-  textContainer.setAttribute(
-    "style",
-    "position: relative; width: calc(100% - 40px); height: calc(100% - 40px); padding: 20px;"
-  );
+  textContainer.appendChild(popupTitle);
+  $setAttr(textContainer, "class", "ql-html-textContainer");
   const textArea = $create("textarea");
-  textArea.setAttribute(
-    "style",
-    "position: absolute; left:15px; width: calc(100% - 45px); height: calc(100% - 116px);"
-  );
+  $setAttr(textArea, "class", "ql-html-textArea");
   textArea.value = formatHTML(htmlFromEditor);
   const buttonCancel = $create("button");
   buttonCancel.innerHTML = "Cancel";
-  buttonCancel.setAttribute("style", "margin-right: 20px;");
+  $setAttr(buttonCancel, "class", "ql-html-buttonCancel");
   const buttonOk = $create("button");
   buttonOk.innerHTML = "Ok";
   const buttonGroup = $create("div");
-  buttonGroup.setAttribute(
-    "style",
-    "position: absolute; bottom: 20px; transform: scale(1.5); left: calc(50% - 60px)"
-  );
+  $setAttr(buttonGroup, "class", "ql-html-buttonGroup");
+
   buttonGroup.appendChild(buttonCancel);
   buttonGroup.appendChild(buttonOk);
   textContainer.appendChild(textArea);
