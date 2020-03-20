@@ -1,6 +1,8 @@
 const path = require("path");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
+const isProd = process.argv.includes('production');
+
 module.exports = [
   {
     entry: {
@@ -10,6 +12,7 @@ module.exports = [
     output: {
       filename: "[name].min.js",
       path: path.resolve(__dirname, "dist"),
+      libraryTarget: "umd",
       publicPath: "/dist/"
     },
     devServer: {
@@ -18,7 +21,7 @@ module.exports = [
     externals: {
       quill: "Quill"
     },
-    devtool: "inline-source-map",
+    devtool: isProd ? undefined : "inline-source-map",
     module: {
       rules: [
         {
