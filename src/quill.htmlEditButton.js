@@ -26,23 +26,24 @@ class htmlEditButton {
     debug = options && options.debug;
     Logger.log("logging enabled");
     // Add button to all quill toolbar instances
-    let toolbars = quill.container.parentElement.querySelectorAll(
-      ".ql-toolbar"
-    );
-    toolbars = [].slice.call(toolbars);
-    toolbars.forEach(toolbarEl => {
-      const buttonContainer = $create("span");
-      $setAttr(buttonContainer, "class", "ql-formats");
-      const button = $create("button");
-      button.innerHTML = "&lt;&gt;";
-      button.title = "Show HTML source";
-      button.onclick = function(e) {
-        e.preventDefault();
-        launchPopupEditor(quill);
-      };
-      buttonContainer.appendChild(button);
-      toolbarEl.appendChild(buttonContainer);
-    });
+    const toolbarModule = quill.getModule('toolbar');
+    if (!toolbarModule) {
+      throw new Error(
+        'quill.htmlEditButton requires the "toolbar" module to be included too'
+      );
+    }
+    let toolbarEl = toolbarModule.container;
+    const buttonContainer = $create("span");
+    $setAttr(buttonContainer, "class", "ql-formats");
+    const button = $create("button");
+    button.innerHTML = "&lt;&gt;";
+    button.title = "Show HTML source";
+    button.onclick = function(e) {
+      e.preventDefault();
+      launchPopupEditor(quill);
+    };
+    buttonContainer.appendChild(button);
+    toolbarEl.appendChild(buttonContainer);
   }
 }
 
