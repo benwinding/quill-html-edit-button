@@ -59,6 +59,9 @@ modules: {
   // ...
   htmlEditButton: {
     debug: true // logging, default:false
+    msg: "Edit the content in HTML format", //Custom message to display in the editor, default: Edit HTML here, when you click "OK" the quill editor's contents will be replaced
+    okText: "Ok" // Text to display in the OK button, default: Ok,
+    cancelText: "Cancel" // Text to display in the cancel button, default: Cancel
   }
 }
 ```

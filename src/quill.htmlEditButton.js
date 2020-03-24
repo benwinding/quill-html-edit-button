@@ -40,24 +40,26 @@ class htmlEditButton {
     button.title = "Show HTML source";
     button.onclick = function(e) {
       e.preventDefault();
-      launchPopupEditor(quill);
+      launchPopupEditor(quill, options);
     };
     buttonContainer.appendChild(button);
     toolbarEl.appendChild(buttonContainer);
   }
 }
 
-function launchPopupEditor(quill) {
+function launchPopupEditor(quill, options) {
   const htmlFromEditor = quill.container.querySelector(".ql-editor").innerHTML;
   const popupContainer = $create("div");
   const overlayContainer = $create("div");
+  const msg = options.msg || 'Edit HTML here, when you click "OK" the quill editor\'s contents will be replaced';
+  const cancelText = options.cancelText || "Cancel";
+  const okText = options.okText || "Ok";
+
   $setAttr(overlayContainer, "class", "ql-html-overlayContainer");
   $setAttr(popupContainer, "class", "ql-html-popupContainer");
   const popupTitle = $create("i");
   $setAttr(popupTitle, "class", "ql-html-popupTitle");
-  popupTitle.innerText =
-    'Edit HTML here, when you click "OK" ' +
-    "the quill editor's contents will be replaced";
+  popupTitle.innerText = msg
   const textContainer = $create("div");
   textContainer.appendChild(popupTitle);
   $setAttr(textContainer, "class", "ql-html-textContainer");
@@ -65,10 +67,10 @@ function launchPopupEditor(quill) {
   $setAttr(textArea, "class", "ql-html-textArea");
   textArea.value = formatHTML(htmlFromEditor);
   const buttonCancel = $create("button");
-  buttonCancel.innerHTML = "Cancel";
+  buttonCancel.innerHTML = cancelText;
   $setAttr(buttonCancel, "class", "ql-html-buttonCancel");
   const buttonOk = $create("button");
-  buttonOk.innerHTML = "Ok";
+  buttonOk.innerHTML = okText;
   const buttonGroup = $create("div");
   $setAttr(buttonGroup, "class", "ql-html-buttonGroup");
 
