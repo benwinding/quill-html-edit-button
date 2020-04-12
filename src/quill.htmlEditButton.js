@@ -1,5 +1,16 @@
 import './styles.css';
 
+// To allow divs to be inserted into html editor
+// obtained from issue: https://github.com/quilljs/quill/issues/2040
+import Quill from "quill";
+var Block = Quill.import('blots/block');
+class Div extends Block {}
+Div.tagName = "div";
+Div.blotName = "div";
+Div.allowedChildren = Block.allowedChildren;
+Div.allowedChildren.push(Block)
+Quill.register(Div);
+
 function $create(elName) {
   return document.createElement(elName);
 }
