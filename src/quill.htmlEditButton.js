@@ -1,16 +1,5 @@
 import './styles.css';
 
-// To allow divs to be inserted into html editor
-// obtained from issue: https://github.com/quilljs/quill/issues/2040
-import Quill from "quill";
-var Block = Quill.import('blots/block');
-class Div extends Block {}
-Div.tagName = "div";
-Div.blotName = "div";
-Div.allowedChildren = Block.allowedChildren;
-Div.allowedChildren.push(Block)
-Quill.register(Div);
-
 function $create(elName) {
   return document.createElement(elName);
 }
@@ -43,6 +32,7 @@ class htmlEditButton {
         'quill.htmlEditButton requires the "toolbar" module to be included too'
       );
     }
+    this.registerDivModule();
     let toolbarEl = toolbarModule.container;
     const buttonContainer = $create("span");
     $setAttr(buttonContainer, "class", "ql-formats");
@@ -55,6 +45,18 @@ class htmlEditButton {
     };
     buttonContainer.appendChild(button);
     toolbarEl.appendChild(buttonContainer);
+  }
+
+  registerDivModule() {
+    // To allow divs to be inserted into html editor
+    // obtained from issue: https://github.com/quilljs/quill/issues/2040
+    var Block = Quill.import('blots/block');
+    class Div extends Block {}
+    Div.tagName = "div";
+    Div.blotName = "div";
+    Div.allowedChildren = Block.allowedChildren;
+    Div.allowedChildren.push(Block)
+    Quill.register(Div);
   }
 }
 
