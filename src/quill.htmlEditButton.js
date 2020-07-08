@@ -37,8 +37,8 @@ class htmlEditButton {
     const buttonContainer = $create("span");
     $setAttr(buttonContainer, "class", "ql-formats");
     const button = $create("button");
-    button.innerHTML = "&lt;&gt;";
-    button.title = "Show HTML source";
+    button.innerHTML = options.buttonHTML || "&lt;&gt;";
+    button.title = options.buttonTitle || "Show HTML source";
     button.onclick = function(e) {
       e.preventDefault();
       launchPopupEditor(quill, options);
