@@ -58,10 +58,12 @@ const quill = new Quill(editor, {
 modules: {
   // ...
   htmlEditButton: {
-    debug: true // logging, default:false
+    debug: true, // logging, default:false
     msg: "Edit the content in HTML format", //Custom message to display in the editor, default: Edit HTML here, when you click "OK" the quill editor's contents will be replaced
-    okText: "Ok" // Text to display in the OK button, default: Ok,
-    cancelText: "Cancel" // Text to display in the cancel button, default: Cancel
+    okText: "Ok", // Text to display in the OK button, default: Ok,
+    cancelText: "Cancel", // Text to display in the cancel button, default: Cancel
+    buttonHTML: "&lt;&gt;", // Text to display in the toolbar button, default: <>
+    buttonTitle: "Show HTML source" // Text to display as the tooltip for the toolbar button, default: Show HTML source
   }
 }
 ```
