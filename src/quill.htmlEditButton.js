@@ -119,17 +119,20 @@ function formatHTML(code) {
   const whitespace = " ".repeat(2); // Default indenting 4 whitespaces
   let currentIndent = 0;
   const newlineChar = "\n";
+  let prevChar = null;
   let char = null;
   let nextChar = null;
 
   let result = "";
   for (let pos = 0; pos <= code.length; pos++) {
+    prevChar = char;
     char = code.substr(pos, 1);
     nextChar = code.substr(pos + 1, 1);
 
     const isBrTag = code.substr(pos, 4) === "<br>";
     const isOpeningTag = char === "<" && nextChar !== "/" && !isBrTag;
     const isClosingTag = char === "<" && nextChar === "/" && !isBrTag;
+    const isTagEnd = prevChar === ">" && char !== "<" && char !== " " && currentIndent > 0;
     if (isBrTag) {
       // If opening tag, add newline character and indention
       result += newlineChar;
@@ -145,6 +148,9 @@ function formatHTML(code) {
     else if (isClosingTag) {
       // If there're more closing tags than opening
       if (--currentIndent < 0) currentIndent = 0;
+      result += newlineChar + whitespace.repeat(currentIndent);
+    }
+    if(isTagEnd) {
       result += newlineChar + whitespace.repeat(currentIndent);
     }
 
