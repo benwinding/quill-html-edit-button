@@ -4,10 +4,9 @@ on:
       - "src/*"
       - ".github/workflows/demo.yml"
 
-name: Build and Publish
+name: Deploy Demo
 jobs:
-  demo:
-    name: Deploy Demo
+  demo:    
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
