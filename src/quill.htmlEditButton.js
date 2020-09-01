@@ -98,7 +98,7 @@ function launchPopupEditor(quill, options) {
   overlayContainer.appendChild(popupContainer);
   document.body.appendChild(overlayContainer);
   var editor = new Quill(htmlEditor, {
-    modules: { syntax: options.syntax && Boolean(hljs) },
+    modules: { syntax: options.syntax },
   });
 
   buttonCancel.onclick = function() {
