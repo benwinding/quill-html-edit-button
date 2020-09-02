@@ -1,4 +1,4 @@
-import './styles.css';
+import "./styles.css";
 
 function $create(elName) {
   return document.createElement(elName);
@@ -26,7 +26,7 @@ class htmlEditButton {
     debug = options && options.debug;
     Logger.log("logging enabled");
     // Add button to all quill toolbar instances
-    const toolbarModule = quill.getModule('toolbar');
+    const toolbarModule = quill.getModule("toolbar");
     if (!toolbarModule) {
       throw new Error(
         'quill.htmlEditButton requires the "toolbar" module to be included too'
@@ -50,12 +50,12 @@ class htmlEditButton {
   registerDivModule() {
     // To allow divs to be inserted into html editor
     // obtained from issue: https://github.com/quilljs/quill/issues/2040
-    var Block = Quill.import('blots/block');
+    var Block = Quill.import("blots/block");
     class Div extends Block {}
     Div.tagName = "div";
     Div.blotName = "div";
     Div.allowedChildren = Block.allowedChildren;
-    Div.allowedChildren.push(Block)
+    Div.allowedChildren.push(Block);
     Quill.register(Div);
   }
 }
@@ -72,13 +72,15 @@ function launchPopupEditor(quill, options) {
   $setAttr(popupContainer, "class", "ql-html-popupContainer");
   const popupTitle = $create("i");
   $setAttr(popupTitle, "class", "ql-html-popupTitle");
-  popupTitle.innerText = msg
+  popupTitle.innerText = msg;
   const textContainer = $create("div");
   textContainer.appendChild(popupTitle);
   $setAttr(textContainer, "class", "ql-html-textContainer");
-  const textArea = $create("textarea");
-  $setAttr(textArea, "class", "ql-html-textArea");
-  textArea.value = formatHTML(htmlFromEditor);
+  const codeBlock = $create("pre");
+  $setAttr(codeBlock, "data-language", "xml");
+  codeBlock.innerText = formatHTML(htmlFromEditor);
+  const htmlEditor = $create("div");
+  $setAttr(htmlEditor, "class", "ql-html-textArea");
   const buttonCancel = $create("button");
   buttonCancel.innerHTML = cancelText;
   $setAttr(buttonCancel, "class", "ql-html-buttonCancel");
@@ -89,11 +91,15 @@ function launchPopupEditor(quill, options) {
 
   buttonGroup.appendChild(buttonCancel);
   buttonGroup.appendChild(buttonOk);
-  textContainer.appendChild(textArea);
+  htmlEditor.appendChild(codeBlock);
+  textContainer.appendChild(htmlEditor);
   textContainer.appendChild(buttonGroup);
   popupContainer.appendChild(textContainer);
   overlayContainer.appendChild(popupContainer);
   document.body.appendChild(overlayContainer);
+  var editor = new Quill(htmlEditor, {
+    modules: { syntax: options.syntax },
+  });
 
   buttonCancel.onclick = function() {
     document.body.removeChild(overlayContainer);
@@ -104,7 +110,7 @@ function launchPopupEditor(quill, options) {
     e.stopPropagation();
   };
   buttonOk.onclick = function() {
-    const output = textArea.value.split(/\r?\n/g).map(el => el.trim());
+    const output = editor.container.querySelector(".ql-editor").innerText.split(/\r?\n/g).map(el => el.trim());
     const noNewlines = output.join("");
     quill.container.querySelector(".ql-editor").innerHTML = noNewlines;
     document.body.removeChild(overlayContainer);

@@ -7,7 +7,8 @@ const fullToolbarOptions = [
   [{ header: [1, 2, 3, false] }],
   ["bold", "italic"],
   ["clean"],
-  ["image"]
+  ["image"],
+  [{ list: 'ordered' }, { list: 'bullet' }]
 ];
 
 console.log("Demo loaded...");
@@ -18,6 +19,6 @@ var quill = new Quill("#editor", {
     toolbar: {
       container: fullToolbarOptions
     },
-    htmlEditButton: { debug: true }
+    htmlEditButton: { debug: true, syntax: true }
   }
 });
