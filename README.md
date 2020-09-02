@@ -69,6 +69,24 @@ modules: {
 }
 ```
 
+### Syntax Highlighting
+
+By default syntax highlighting is off, if you want to enable it use `syntax: true` in the options (as shown above) and make sure you add the following script tags:
+
+``` html
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/github.min.css"
+/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
+<script
+  charset="UTF-8"
+  src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/languages/xml.min.js"
+></script>
+```
+
+Alternatively, include these scripts in your package bundler, as long as highlightjs is available in the global space at `window.hljs`.
+
 ## Thanks
 
 This project is based on [quill-image-uploader](https://github.com/NoelOConnell/quill-image-uploader), thanks mate!
