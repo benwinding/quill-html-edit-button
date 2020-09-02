@@ -26,6 +26,7 @@
 }
 
 .ql-html-textArea {
+  background: #fff;
   position: absolute;
   left: 15px;
   width: calc(100% - 45px);

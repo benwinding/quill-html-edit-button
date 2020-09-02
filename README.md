@@ -63,7 +63,8 @@ modules: {
     okText: "Ok", // Text to display in the OK button, default: Ok,
     cancelText: "Cancel", // Text to display in the cancel button, default: Cancel
     buttonHTML: "&lt;&gt;", // Text to display in the toolbar button, default: <>
-    buttonTitle: "Show HTML source" // Text to display as the tooltip for the toolbar button, default: Show HTML source
+    buttonTitle: "Show HTML source", // Text to display as the tooltip for the toolbar button, default: Show HTML source
+    syntax: false // Show the HTML with syntax highlighting. Requires highlightjs on window.hljs (similar to Quill itself), default: false
   }
 }
 ```

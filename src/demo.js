@@ -7,7 +7,8 @@ const fullToolbarOptions = [
   [{ header: [1, 2, 3, false] }],
   ["bold", "italic"],
   ["clean"],
-  ["image"]
+  ["image"],
+  [{ list: 'ordered' }, { list: 'bullet' }]
 ];
 
 console.log("Demo loaded...");
