@@ -110,8 +110,16 @@ function launchPopupEditor(quill, options) {
     e.stopPropagation();
   };
   buttonOk.onclick = function() {
-    const output = editor.container.querySelector(".ql-editor").innerText.split(/\r?\n/g).map(el => el.trim());
-    const noNewlines = output.join("");
+    const output = editor.container.querySelector(".ql-editor").innerText;
+    const noNewlines = output
+    .replace(/\s+/g, " ") // convert multiple spaces to a single space. This is how HTML treats them
+    .replace(/(<[^\/<>]+>)\s+/g, "$1") // remove spaces after the start of a new tag
+    .replace(/<\/(p|ol|ul)>\s/g, "</$1>") // remove spaces after the end of lists and paragraphs, they tend to break quill
+    .replace(/\s<(p|ol|ul)>/g, "<$1>") // remove spaces before the start of lists and paragraphs, they tend to break quill
+    .replace(/<\/li>\s<li>/g, "</li><li>") // remove spaces between list items, they tend to break quill
+    .replace(/\s<\//g, "</") // remove spaces before the end of tags
+    .replace(/(<[^\/<>]+>)\s(<[^\/<>]+>)/g, "$1$2") // remove space between multiple starting tags
+    .trim();
     quill.container.querySelector(".ql-editor").innerHTML = noNewlines;
     document.body.removeChild(overlayContainer);
   };
@@ -138,7 +146,8 @@ function formatHTML(code) {
     const isBrTag = code.substr(pos, 4) === "<br>";
     const isOpeningTag = char === "<" && nextChar !== "/" && !isBrTag;
     const isClosingTag = char === "<" && nextChar === "/" && !isBrTag;
-    const isTagEnd = prevChar === ">" && char !== "<" && char !== " " && currentIndent > 0;
+    const isTagEnd = prevChar === ">" && char !== "<" && currentIndent > 0;
+    const isTagNext = !isBrTag && !isOpeningTag && !isClosingTag && isTagEnd && code.substr(pos, code.substr(pos).indexOf("<")).trim() === "";
     if (isBrTag) {
       // If opening tag, add newline character and indention
       result += newlineChar;
@@ -156,10 +165,6 @@ function formatHTML(code) {
       if (--currentIndent < 0) currentIndent = 0;
       result += newlineChar + whitespace.repeat(currentIndent);
     }
-    if(isTagEnd) {
-      result += newlineChar + whitespace.repeat(currentIndent);
-    }
-
     // remove multiple whitespaces
     else if (stripWhiteSpaces === true && char === " " && nextChar === " ")
       char = "";
@@ -168,6 +173,9 @@ function formatHTML(code) {
       //debugger;
       if (code.substr(pos, code.substr(pos).indexOf("<")).trim() === "")
         char = "";
+    }
+    if(isTagEnd && !isTagNext) {
+      result += newlineChar + whitespace.repeat(currentIndent);
     }
 
     result += char;
