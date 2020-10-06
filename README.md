@@ -15,6 +15,7 @@ Quill.js Module which allows you to quickly view/edit the HTML in the editor
 
 - [Live Demo](https://benwinding.github.io/quill-html-edit-button/src/demo.html)
 - [Live Demo (using script tags)](https://benwinding.github.io/quill-html-edit-button/src/demo-script-tag.html)
+- [Live Demo With Tables! (quill-2.x)](https://benwinding.github.io/quill-html-edit-button/src/demo-script-tag-2.x.html)
 
 ## Install
 
