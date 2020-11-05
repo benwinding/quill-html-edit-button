@@ -88,6 +88,7 @@ function launchPopupEditor(quill, options) {
   buttonOk.innerHTML = okText;
   const buttonGroup = $create("div");
   $setAttr(buttonGroup, "class", "ql-html-buttonGroup");
+  const prependSelector = document.querySelector(options.prependSelector)
 
   buttonGroup.appendChild(buttonCancel);
   buttonGroup.appendChild(buttonOk);
@@ -96,13 +97,24 @@ function launchPopupEditor(quill, options) {
   textContainer.appendChild(buttonGroup);
   popupContainer.appendChild(textContainer);
   overlayContainer.appendChild(popupContainer);
-  document.body.appendChild(overlayContainer);
+
+  if (prependSelector) {
+    prependSelector.prepend(overlayContainer)
+  } else {
+    document.body.appendChild(overlayContainer);
+  }
+
+
   var editor = new Quill(htmlEditor, {
     modules: { syntax: options.syntax },
   });
 
   buttonCancel.onclick = function() {
-    document.body.removeChild(overlayContainer);
+    if (prependSelector) {
+      prependSelector.removeChild(overlayContainer)
+    } else {
+      document.body.removeChild(overlayContainer);
+    }
   };
   overlayContainer.onclick = buttonCancel.onclick;
   popupContainer.onclick = function(e) {
@@ -121,7 +133,12 @@ function launchPopupEditor(quill, options) {
     .replace(/(<[^\/<>]+>)\s(<[^\/<>]+>)/g, "$1$2") // remove space between multiple starting tags
     .trim();
     quill.container.querySelector(".ql-editor").innerHTML = noNewlines;
-    document.body.removeChild(overlayContainer);
+
+    if (prependSelector) {
+      prependSelector.removeChild(overlayContainer)
+    } else {
+      document.body.removeChild(overlayContainer);
+    }
   };
 }
 
