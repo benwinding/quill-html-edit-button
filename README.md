@@ -65,7 +65,8 @@ modules: {
     cancelText: "Cancel", // Text to display in the cancel button, default: Cancel
     buttonHTML: "&lt;&gt;", // Text to display in the toolbar button, default: <>
     buttonTitle: "Show HTML source", // Text to display as the tooltip for the toolbar button, default: Show HTML source
-    syntax: false // Show the HTML with syntax highlighting. Requires highlightjs on window.hljs (similar to Quill itself), default: false
+    syntax: false, // Show the HTML with syntax highlighting. Requires highlightjs on window.hljs (similar to Quill itself), default: false
+    prependSelector: 'div#myelement', // a string used to select where you want to insert the overlayContainer, default: null (appends to body)
   }
 }
 ```
