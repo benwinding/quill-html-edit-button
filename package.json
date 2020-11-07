@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "watch": "webpack --watch --progress",
-    "start": "webpack-dev-server --mode development --hot --port 8001",
+    "start": "webpack --mode development && webpack-dev-server --mode development --hot --port 8001",
     "build": "webpack --mode production",
     "clean": "rm -rf dist/"
   },

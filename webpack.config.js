@@ -2,6 +2,8 @@ const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
+const isProd = process.argv.includes('production');
+
 module.exports = [{
   entry: {
     "quill.htmlEditButton": "./src/quill.htmlEditButton.js",
@@ -10,15 +12,16 @@ module.exports = [{
   output: {
     filename: "[name].min.js",
     path: path.resolve(__dirname, "dist"),
+    libraryTarget: "umd",
+    publicPath: "/dist/"
   },
   devServer: {
-    //contentBase: './src',
-    https: true,
+    contentBase: './src'
   },
   externals: {
     quill: "Quill",
   },
-  devtool: 'source-map',
+  devtool: isProd ? 'source-map' : "inline-source-map",
   optimization: {
     minimize: true,
     minimizer: [
