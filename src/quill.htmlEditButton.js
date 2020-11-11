@@ -70,7 +70,7 @@ function launchPopupEditor(quill, options) {
 
   $setAttr(overlayContainer, "class", "ql-html-overlayContainer");
   $setAttr(popupContainer, "class", "ql-html-popupContainer");
-  const popupTitle = $create("i");
+  const popupTitle = $create("span");
   $setAttr(popupTitle, "class", "ql-html-popupTitle");
   popupTitle.innerText = msg;
   const textContainer = $create("div");
@@ -86,6 +86,7 @@ function launchPopupEditor(quill, options) {
   $setAttr(buttonCancel, "class", "ql-html-buttonCancel");
   const buttonOk = $create("button");
   buttonOk.innerHTML = okText;
+  $setAttr(buttonOk, "class", "ql-html-buttonOk");
   const buttonGroup = $create("div");
   $setAttr(buttonGroup, "class", "ql-html-buttonGroup");
   const prependSelector = document.querySelector(options.prependSelector)
