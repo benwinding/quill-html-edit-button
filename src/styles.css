@@ -40,6 +40,7 @@
 .ql-html-popupTitle {
   margin: 0;
   display: block;
+  font-style: italic;
 }
 
 .ql-html-buttonGroup {
