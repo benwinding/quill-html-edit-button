@@ -22,7 +22,8 @@ const Logger = {
 };
 
 class htmlEditButton {
-  constructor(quill, options) {
+  constructor(quill, optionsInput) {
+    const options = optionsInput || {};
     debug = options && options.debug;
     Logger.log("logging enabled");
     // Add button to all quill toolbar instances
@@ -107,8 +108,14 @@ function launchPopupEditor(quill, options) {
     document.body.appendChild(overlayContainer);
   }
 
+  const modules = options && options.editorModules;
+  const hasModules = !!modules && !!Object.keys(modules).length;
+  const modulesSafe = hasModules ? modules : {};
   var editor = new Quill(htmlEditor, {
-    modules: { syntax: options.syntax },
+    modules: { 
+      syntax: options.syntax,
+      ...modulesSafe
+    },
   });
 
   buttonCancel.onclick = function () {
