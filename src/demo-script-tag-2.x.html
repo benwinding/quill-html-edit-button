@@ -24,29 +24,19 @@
   </head>
 
   <body>
-    <h3>
-      Demo of quill-html-edit-button (using script tags) in Quill 2.x
-    </h3>
+    <h3>Demo of quill-html-edit-button (using script tags) in Quill 2.x</h3>
     <!-- Create the editor container -->
     <div id="editor">
       <p>Select the HTML button from the toolbar</p>
-			<p><br /></p>
+      <p><br /></p>
       <p>Try editing this sentence!</p>
-      <h3>
-        Wow a table!
-      </h3>
+      <h3>Wow a table!</h3>
       <table>
         <tbody>
           <tr>
-            <td>
-              Australia
-            </td>
-            <td>
-              America
-            </td>
-            <td>
-              Americalia
-            </td>
+            <td>Australia</td>
+            <td>America</td>
+            <td>Americalia</td>
           </tr>
         </tbody>
       </table>
@@ -64,7 +54,7 @@
         [{ header: [1, 2, 3, false] }],
         ["bold", "italic"],
         ["clean"],
-        ["image"]
+        ["image"],
       ];
 
       console.log("Demo loaded...");
@@ -73,12 +63,12 @@
         theme: "snow",
         modules: {
           toolbar: {
-            container: fullToolbarOptions
+            container: fullToolbarOptions,
           },
           htmlEditButton: {
-            syntax: true
-          }
-        }
+            syntax: true,
+          },
+        },
       });
     </script>
   </body>
