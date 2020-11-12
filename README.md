@@ -66,7 +66,8 @@ modules: {
     buttonHTML: "&lt;&gt;", // Text to display in the toolbar button, default: <>
     buttonTitle: "Show HTML source", // Text to display as the tooltip for the toolbar button, default: Show HTML source
     syntax: false, // Show the HTML with syntax highlighting. Requires highlightjs on window.hljs (similar to Quill itself), default: false
-    prependSelector: 'div#myelement', // a string used to select where you want to insert the overlayContainer, default: null (appends to body)
+    prependSelector: 'div#myelement', // a string used to select where you want to insert the overlayContainer, default: null (appends to body),
+    editorModules: {} // The default mod
   }
 }
 ```
@@ -88,6 +89,30 @@ By default syntax highlighting is off, if you want to enable it use `syntax: tru
 ```
 
 Alternatively, include these scripts in your package bundler, as long as highlightjs is available in the global space at `window.hljs`.
+
+## Customising The Editor
+The editor itself is actually a Quill Editor instance too! So you can pass in custom modules like this:
+
+``` js
+  // options
+  htmlEditButton: {
+    debug: true,
+    syntax: true,
+    editorModules: {
+      // Any modules here will be declared in HTML quill editor instance
+      keyboard: {
+        bindings: {
+          custom: {
+            key: 'a',
+            handler: function(range, context) {
+              console.log('A KEY PRESSED!');
+            }
+          },
+        },
+      },
+    },
+  },
+```
 
 ## Thanks
 
