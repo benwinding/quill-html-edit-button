@@ -24,13 +24,11 @@
   </head>
 
   <body>
-    <h3>
-      Demo of quill-html-edit-button (using script tags)
-    </h3>
+    <h3>Demo of quill-html-edit-button (using script tags)</h3>
     <!-- Create the editor container -->
     <div id="editor">
       <p>Select the HTML button from the toolbar</p>
-			<p><br /></p>
+      <p><br /></p>
       <p>Try editing this sentence!</p>
     </div>
 
@@ -46,7 +44,7 @@
         [{ header: [1, 2, 3, false] }],
         ["bold", "italic"],
         ["clean"],
-        ["image"]
+        ["image"],
       ];
 
       console.log("Demo loaded...");
@@ -55,12 +53,12 @@
         theme: "snow",
         modules: {
           toolbar: {
-            container: fullToolbarOptions
+            container: fullToolbarOptions,
           },
           htmlEditButton: {
-            syntax: true
-          }
-        }
+            syntax: true,
+          },
+        },
       });
     </script>
   </body>

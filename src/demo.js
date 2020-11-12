@@ -8,7 +8,7 @@ const fullToolbarOptions = [
   ["bold", "italic"],
   ["clean"],
   ["image"],
-  [{ list: 'ordered' }, { list: 'bullet' }]
+  [{ list: "ordered" }, { list: "bullet" }],
 ];
 
 console.log("Demo loaded...");
@@ -17,8 +17,8 @@ var quill = new Quill("#editor", {
   theme: "snow",
   modules: {
     toolbar: {
-      container: fullToolbarOptions
+      container: fullToolbarOptions,
     },
-    htmlEditButton: { debug: true, syntax: true }
-  }
+    htmlEditButton: { debug: true, syntax: true },
+  },
 });

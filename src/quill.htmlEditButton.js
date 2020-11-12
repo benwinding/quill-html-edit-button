@@ -18,7 +18,7 @@ const Logger = {
     }
     const boundLogFn = console.log.bind(console, this.prefixString());
     return boundLogFn;
-  }
+  },
 };
 
 class htmlEditButton {
@@ -39,7 +39,7 @@ class htmlEditButton {
     const button = $create("button");
     button.innerHTML = options.buttonHTML || "&lt;&gt;";
     button.title = options.buttonTitle || "Show HTML source";
-    button.onclick = function(e) {
+    button.onclick = function (e) {
       e.preventDefault();
       launchPopupEditor(quill, options);
     };
@@ -64,7 +64,9 @@ function launchPopupEditor(quill, options) {
   const htmlFromEditor = quill.container.querySelector(".ql-editor").innerHTML;
   const popupContainer = $create("div");
   const overlayContainer = $create("div");
-  const msg = options.msg || 'Edit HTML here, when you click "OK" the quill editor\'s contents will be replaced';
+  const msg =
+    options.msg ||
+    'Edit HTML here, when you click "OK" the quill editor\'s contents will be replaced';
   const cancelText = options.cancelText || "Cancel";
   const okText = options.okText || "Ok";
 
@@ -89,7 +91,7 @@ function launchPopupEditor(quill, options) {
   $setAttr(buttonOk, "class", "ql-html-buttonOk");
   const buttonGroup = $create("div");
   $setAttr(buttonGroup, "class", "ql-html-buttonGroup");
-  const prependSelector = document.querySelector(options.prependSelector)
+  const prependSelector = document.querySelector(options.prependSelector);
 
   buttonGroup.appendChild(buttonCancel);
   buttonGroup.appendChild(buttonOk);
@@ -100,43 +102,42 @@ function launchPopupEditor(quill, options) {
   overlayContainer.appendChild(popupContainer);
 
   if (prependSelector) {
-    prependSelector.prepend(overlayContainer)
+    prependSelector.prepend(overlayContainer);
   } else {
     document.body.appendChild(overlayContainer);
   }
-
 
   var editor = new Quill(htmlEditor, {
     modules: { syntax: options.syntax },
   });
 
-  buttonCancel.onclick = function() {
+  buttonCancel.onclick = function () {
     if (prependSelector) {
-      prependSelector.removeChild(overlayContainer)
+      prependSelector.removeChild(overlayContainer);
     } else {
       document.body.removeChild(overlayContainer);
     }
   };
   overlayContainer.onclick = buttonCancel.onclick;
-  popupContainer.onclick = function(e) {
+  popupContainer.onclick = function (e) {
     e.preventDefault();
     e.stopPropagation();
   };
-  buttonOk.onclick = function() {
+  buttonOk.onclick = function () {
     const output = editor.container.querySelector(".ql-editor").innerText;
     const noNewlines = output
-    .replace(/\s+/g, " ") // convert multiple spaces to a single space. This is how HTML treats them
-    .replace(/(<[^\/<>]+>)\s+/g, "$1") // remove spaces after the start of a new tag
-    .replace(/<\/(p|ol|ul)>\s/g, "</$1>") // remove spaces after the end of lists and paragraphs, they tend to break quill
-    .replace(/\s<(p|ol|ul)>/g, "<$1>") // remove spaces before the start of lists and paragraphs, they tend to break quill
-    .replace(/<\/li>\s<li>/g, "</li><li>") // remove spaces between list items, they tend to break quill
-    .replace(/\s<\//g, "</") // remove spaces before the end of tags
-    .replace(/(<[^\/<>]+>)\s(<[^\/<>]+>)/g, "$1$2") // remove space between multiple starting tags
-    .trim();
+      .replace(/\s+/g, " ") // convert multiple spaces to a single space. This is how HTML treats them
+      .replace(/(<[^\/<>]+>)\s+/g, "$1") // remove spaces after the start of a new tag
+      .replace(/<\/(p|ol|ul)>\s/g, "</$1>") // remove spaces after the end of lists and paragraphs, they tend to break quill
+      .replace(/\s<(p|ol|ul)>/g, "<$1>") // remove spaces before the start of lists and paragraphs, they tend to break quill
+      .replace(/<\/li>\s<li>/g, "</li><li>") // remove spaces between list items, they tend to break quill
+      .replace(/\s<\//g, "</") // remove spaces before the end of tags
+      .replace(/(<[^\/<>]+>)\s(<[^\/<>]+>)/g, "$1$2") // remove space between multiple starting tags
+      .trim();
     quill.container.querySelector(".ql-editor").innerHTML = noNewlines;
 
     if (prependSelector) {
-      prependSelector.removeChild(overlayContainer)
+      prependSelector.removeChild(overlayContainer);
     } else {
       document.body.removeChild(overlayContainer);
     }
@@ -165,7 +166,12 @@ function formatHTML(code) {
     const isOpeningTag = char === "<" && nextChar !== "/" && !isBrTag;
     const isClosingTag = char === "<" && nextChar === "/" && !isBrTag;
     const isTagEnd = prevChar === ">" && char !== "<" && currentIndent > 0;
-    const isTagNext = !isBrTag && !isOpeningTag && !isClosingTag && isTagEnd && code.substr(pos, code.substr(pos).indexOf("<")).trim() === "";
+    const isTagNext =
+      !isBrTag &&
+      !isOpeningTag &&
+      !isClosingTag &&
+      isTagEnd &&
+      code.substr(pos, code.substr(pos).indexOf("<")).trim() === "";
     if (isBrTag) {
       // If opening tag, add newline character and indention
       result += newlineChar;
@@ -192,7 +198,7 @@ function formatHTML(code) {
       if (code.substr(pos, code.substr(pos).indexOf("<")).trim() === "")
         char = "";
     }
-    if(isTagEnd && !isTagNext) {
+    if (isTagEnd && !isTagNext) {
       result += newlineChar + whitespace.repeat(currentIndent);
     }
 
@@ -200,7 +206,7 @@ function formatHTML(code) {
   }
   Logger.log("formatHTML", {
     before: code,
-    after: result
+    after: result,
   });
   return result;
 }
