@@ -70,6 +70,7 @@ function launchPopupEditor(quill, options) {
     'Edit HTML here, when you click "OK" the quill editor\'s contents will be replaced';
   const cancelText = options.cancelText || "Cancel";
   const okText = options.okText || "Ok";
+  const closeOnClickOverlay = options.closeOnClickOverlay !== false
 
   $setAttr(overlayContainer, "class", "ql-html-overlayContainer");
   $setAttr(popupContainer, "class", "ql-html-popupContainer");
@@ -125,7 +126,11 @@ function launchPopupEditor(quill, options) {
       document.body.removeChild(overlayContainer);
     }
   };
-  overlayContainer.onclick = buttonCancel.onclick;
+
+  if (closeOnClickOverlay) {
+    overlayContainer.onclick = buttonCancel.onclick;
+  }
+
   popupContainer.onclick = function (e) {
     e.preventDefault();
     e.stopPropagation();
