@@ -32,6 +32,11 @@
   height: calc(100% - 116px);
 }
 
+.ql-html-textArea .ql-syntax {
+  word-break: break-all;
+  white-space: pre-wrap;
+}
+
 .ql-html-buttonCancel {
   margin-right: 20px;
 }
