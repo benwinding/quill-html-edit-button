@@ -24,7 +24,7 @@ Quill.js Module which allows you to quickly view/edit the HTML in the editor
 ## Quickstart
 
 ``` js
-import { htmlEditButton } from "./quill.htmlEditButton.js";
+import { htmlEditButton } from "quill-html-edit-button";
 
 Quill.register("modules/htmlEditButton", htmlEditButton);
 
