@@ -1,9 +1,10 @@
 import "./styles.css";
+import Quill from 'quill';
 
-function $create(elName) {
+function $create(elName: string) {
   return document.createElement(elName);
 }
-function $setAttr(el, key, value) {
+function $setAttr(el: HTMLElement, key: string, value: string) {
   return el.setAttribute(key, value);
 }
 
@@ -14,7 +15,7 @@ const Logger = {
   },
   get log() {
     if (!debug) {
-      return (...any) => {};
+      return (...args: any) => {};
     }
     const boundLogFn = console.log.bind(console, this.prefixString());
     return boundLogFn;
@@ -51,7 +52,7 @@ class htmlEditButton {
   registerDivModule() {
     // To allow divs to be inserted into html editor
     // obtained from issue: https://github.com/quilljs/quill/issues/2040
-    var Block = Quill.import("blots/block");
+    const Block = Quill.import("blots/block");
     class Div extends Block {}
     Div.tagName = "div";
     Div.blotName = "div";
@@ -61,7 +62,7 @@ class htmlEditButton {
   }
 }
 
-function launchPopupEditor(quill, options) {
+function launchPopupEditor(quill: Quill & any, options: any) {
   const htmlFromEditor = quill.container.querySelector(".ql-editor").innerHTML;
   const popupContainer = $create("div");
   const overlayContainer = $create("div");
@@ -112,7 +113,7 @@ function launchPopupEditor(quill, options) {
   const modules = options && options.editorModules;
   const hasModules = !!modules && !!Object.keys(modules).length;
   const modulesSafe = hasModules ? modules : {};
-  var editor = new Quill(htmlEditor, {
+  const editor = new Quill(htmlEditor, {
     modules: { 
       syntax: options.syntax,
       ...modulesSafe
@@ -136,7 +137,10 @@ function launchPopupEditor(quill, options) {
     e.stopPropagation();
   };
   buttonOk.onclick = function () {
-    const output = editor.container.querySelector(".ql-editor").innerText;
+
+    const container = (editor as any).container as HTMLElement;
+    const qlElement = container.querySelector(".ql-editor") as HTMLDivElement;
+    const output = qlElement.innerText;
     const noNewlines = output
       .replace(/\s+/g, " ") // convert multiple spaces to a single space. This is how HTML treats them
       .replace(/(<[^\/<>]+>)\s+/g, "$1") // remove spaces after the start of a new tag
@@ -157,7 +161,7 @@ function launchPopupEditor(quill, options) {
 }
 
 // Adapted FROM jsfiddle here: https://jsfiddle.net/buksy/rxucg1gd/
-function formatHTML(code) {
+function formatHTML(code: string) {
   "use strict";
   let stripWhiteSpaces = true;
   let stripEmptyLines = true;
@@ -223,6 +227,6 @@ function formatHTML(code) {
   return result;
 }
 
-window.htmlEditButton = htmlEditButton;
+window['htmlEditButton'] = htmlEditButton;
 export default htmlEditButton;
 export { htmlEditButton };

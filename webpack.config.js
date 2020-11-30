@@ -6,8 +6,8 @@ const isProd = process.argv.includes('production');
 module.exports = [
   {
     entry: {
-      "quill.htmlEditButton": "./src/quill.htmlEditButton.js",
-      demo: "./src/demo.js",
+      demo: "./src/demo.ts",
+      "quill.htmlEditButton": "./src/quill.htmlEditButton.ts",
     },
     output: {
       filename: "[name].min.js",
@@ -40,8 +40,12 @@ module.exports = [
         }),
       ],
     },
+    resolve: {
+      extensions: [".ts", ".js"],
+    },
     module: {
       rules: [
+        { test: /\.ts$/, use: ["ts-loader"], exclude: /node_modules/ },
         {
           test: /\.css$/,
           use: ["style-loader", "css-loader"],
