@@ -1,5 +1,5 @@
 import "./styles.css";
-import Quill from 'quill';
+import Quill from "quill";
 import { QuillHtmlEditButtonOptions } from "./options";
 
 function $create(elName: string) {
@@ -63,7 +63,10 @@ class htmlEditButton {
   }
 }
 
-function launchPopupEditor(quill: Quill & any, options: QuillHtmlEditButtonOptions) {
+function launchPopupEditor(
+  quill: Quill & any,
+  options: QuillHtmlEditButtonOptions
+) {
   const htmlFromEditor = quill.container.querySelector(".ql-editor").innerHTML;
   const popupContainer = $create("div");
   const overlayContainer = $create("div");
@@ -72,7 +75,7 @@ function launchPopupEditor(quill: Quill & any, options: QuillHtmlEditButtonOptio
     'Edit HTML here, when you click "OK" the quill editor\'s contents will be replaced';
   const cancelText = options.cancelText || "Cancel";
   const okText = options.okText || "Ok";
-  const closeOnClickOverlay = options.closeOnClickOverlay !== false
+  const closeOnClickOverlay = options.closeOnClickOverlay !== false;
 
   $setAttr(overlayContainer, "class", "ql-html-overlayContainer");
   $setAttr(popupContainer, "class", "ql-html-popupContainer");
@@ -114,12 +117,14 @@ function launchPopupEditor(quill: Quill & any, options: QuillHtmlEditButtonOptio
   const modules = options && options.editorModules;
   const hasModules = !!modules && !!Object.keys(modules).length;
   const modulesSafe = hasModules ? modules : {};
+  // console.time('new Quill')
   const editor = new Quill(htmlEditor, {
-    modules: { 
+    modules: {
       syntax: options.syntax,
-      ...modulesSafe
+      ...modulesSafe,
     },
   });
+  // console.timeEnd('new Quill')
 
   buttonCancel.onclick = function () {
     if (prependSelector) {
@@ -138,7 +143,6 @@ function launchPopupEditor(quill: Quill & any, options: QuillHtmlEditButtonOptio
     e.stopPropagation();
   };
   buttonOk.onclick = function () {
-
     const container = (editor as any).container as HTMLElement;
     const qlElement = container.querySelector(".ql-editor") as HTMLDivElement;
     const output = qlElement.innerText;
@@ -228,6 +232,6 @@ function formatHTML(code: string) {
   return result;
 }
 
-(window as any)['htmlEditButton'] = htmlEditButton;
+(window as any)["htmlEditButton"] = htmlEditButton;
 export default htmlEditButton;
 export { htmlEditButton };
