@@ -93,12 +93,23 @@ Alternatively, include these scripts in your package bundler, as long as highlig
 ## Customising The Editor
 The editor itself is actually a Quill Editor instance too! So you can pass in custom modules like this:
 
-``` js
+``` ts
   // options
   htmlEditButton: {
-    debug: true,
-    syntax: true,
-    editorModules: {
+    // Flags
+    debug?: boolean;              // default:  false 
+    syntax?: boolean;             // default:  false  
+    // Overlay
+    closeOnClickOverlay: boolean; // default:  true                       
+    prependSelector: string;      // default:  null                       
+    // Labels
+    buttonHTML?: string;          // default:  "&lt;&gt;"
+    buttonTitle?: string;         // default:  "Show HTML source"
+    msg: string;                  // default:  'Edit HTML here, when you click "OK" the quill editor\'s contents will be replaced'     
+    okText: string;               // default:  "Ok"
+    cancelText: string;           // default:  "Cancel"            
+    // Quill Modules (for the HTML editor)
+    editorModules?: {             // default:  null
       // Any modules here will be declared in HTML quill editor instance
       keyboard: {
         bindings: {

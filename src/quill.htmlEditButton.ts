@@ -1,5 +1,6 @@
 import "./styles.css";
 import Quill from 'quill';
+import { QuillHtmlEditButtonOptions } from "./options";
 
 function $create(elName: string) {
   return document.createElement(elName);
@@ -23,9 +24,9 @@ const Logger = {
 };
 
 class htmlEditButton {
-  constructor(quill, optionsInput) {
+  constructor(quill: Quill, optionsInput: QuillHtmlEditButtonOptions) {
     const options = optionsInput || {};
-    debug = options && options.debug;
+    debug = !!(options && options.debug);
     Logger.log("logging enabled");
     // Add button to all quill toolbar instances
     const toolbarModule = quill.getModule("toolbar");
@@ -62,7 +63,7 @@ class htmlEditButton {
   }
 }
 
-function launchPopupEditor(quill: Quill & any, options: any) {
+function launchPopupEditor(quill: Quill & any, options: QuillHtmlEditButtonOptions) {
   const htmlFromEditor = quill.container.querySelector(".ql-editor").innerHTML;
   const popupContainer = $create("div");
   const overlayContainer = $create("div");
@@ -227,6 +228,6 @@ function formatHTML(code: string) {
   return result;
 }
 
-window['htmlEditButton'] = htmlEditButton;
+(window as any)['htmlEditButton'] = htmlEditButton;
 export default htmlEditButton;
 export { htmlEditButton };

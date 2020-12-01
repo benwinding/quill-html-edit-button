@@ -2,7 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./src",
-    "strict": false,
+    "strict": true,
     "declaration": false,
     "module": "commonjs",
     "target": "es5",
