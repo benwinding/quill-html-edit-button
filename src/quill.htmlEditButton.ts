@@ -1,9 +1,11 @@
 import "./styles.css";
+import Quill from "quill";
+import { QuillHtmlEditButtonOptions } from "./options";
 
-function $create(elName) {
+function $create(elName: string) {
   return document.createElement(elName);
 }
-function $setAttr(el, key, value) {
+function $setAttr(el: HTMLElement, key: string, value: string) {
   return el.setAttribute(key, value);
 }
 
@@ -14,7 +16,7 @@ const Logger = {
   },
   get log() {
     if (!debug) {
-      return (...any) => {};
+      return (...args: any) => {};
     }
     const boundLogFn = console.log.bind(console, this.prefixString());
     return boundLogFn;
@@ -22,9 +24,9 @@ const Logger = {
 };
 
 class htmlEditButton {
-  constructor(quill, optionsInput) {
+  constructor(quill: Quill, optionsInput: QuillHtmlEditButtonOptions) {
     const options = optionsInput || {};
-    debug = options && options.debug;
+    debug = !!(options && options.debug);
     Logger.log("logging enabled");
     // Add button to all quill toolbar instances
     const toolbarModule = quill.getModule("toolbar");
@@ -51,7 +53,7 @@ class htmlEditButton {
   registerDivModule() {
     // To allow divs to be inserted into html editor
     // obtained from issue: https://github.com/quilljs/quill/issues/2040
-    var Block = Quill.import("blots/block");
+    const Block = Quill.import("blots/block");
     class Div extends Block {}
     Div.tagName = "div";
     Div.blotName = "div";
@@ -61,7 +63,10 @@ class htmlEditButton {
   }
 }
 
-function launchPopupEditor(quill, options) {
+function launchPopupEditor(
+  quill: Quill & any,
+  options: QuillHtmlEditButtonOptions
+) {
   const htmlFromEditor = quill.container.querySelector(".ql-editor").innerHTML;
   const popupContainer = $create("div");
   const overlayContainer = $create("div");
@@ -70,7 +75,7 @@ function launchPopupEditor(quill, options) {
     'Edit HTML here, when you click "OK" the quill editor\'s contents will be replaced';
   const cancelText = options.cancelText || "Cancel";
   const okText = options.okText || "Ok";
-  const closeOnClickOverlay = options.closeOnClickOverlay !== false
+  const closeOnClickOverlay = options.closeOnClickOverlay !== false;
 
   $setAttr(overlayContainer, "class", "ql-html-overlayContainer");
   $setAttr(popupContainer, "class", "ql-html-popupContainer");
@@ -112,12 +117,14 @@ function launchPopupEditor(quill, options) {
   const modules = options && options.editorModules;
   const hasModules = !!modules && !!Object.keys(modules).length;
   const modulesSafe = hasModules ? modules : {};
-  var editor = new Quill(htmlEditor, {
-    modules: { 
+  // console.time('new Quill')
+  const editor = new Quill(htmlEditor, {
+    modules: {
       syntax: options.syntax,
-      ...modulesSafe
+      ...modulesSafe,
     },
   });
+  // console.timeEnd('new Quill')
 
   buttonCancel.onclick = function () {
     if (prependSelector) {
@@ -136,7 +143,9 @@ function launchPopupEditor(quill, options) {
     e.stopPropagation();
   };
   buttonOk.onclick = function () {
-    const output = editor.container.querySelector(".ql-editor").innerText;
+    const container = (editor as any).container as HTMLElement;
+    const qlElement = container.querySelector(".ql-editor") as HTMLDivElement;
+    const output = qlElement.innerText;
     const noNewlines = output
       .replace(/\s+/g, " ") // convert multiple spaces to a single space. This is how HTML treats them
       .replace(/(<[^\/<>]+>)\s+/g, "$1") // remove spaces after the start of a new tag
@@ -157,7 +166,7 @@ function launchPopupEditor(quill, options) {
 }
 
 // Adapted FROM jsfiddle here: https://jsfiddle.net/buksy/rxucg1gd/
-function formatHTML(code) {
+function formatHTML(code: string) {
   "use strict";
   let stripWhiteSpaces = true;
   let stripEmptyLines = true;
@@ -223,6 +232,6 @@ function formatHTML(code) {
   return result;
 }
 
-window.htmlEditButton = htmlEditButton;
+(window as any)["htmlEditButton"] = htmlEditButton;
 export default htmlEditButton;
 export { htmlEditButton };
