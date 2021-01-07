@@ -19,7 +19,7 @@ module.exports = [
       contentBase: "./src",
     },
     externals: {
-      quill: "Quill",
+      quill: "quill",
     },
     devtool: isProd ? "source-map" : "inline-source-map",
     optimization: {
