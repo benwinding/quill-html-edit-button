@@ -1,8 +1,7 @@
 on:
   push:
-    paths:
-      - "src/*"
-      - ".github/workflows/demo.yml"
+    branches:
+      - master
 
 name: Deploy Demo
 jobs:
@@ -31,7 +30,6 @@ jobs:
           cp -r src demo/src
           find ./demo
       - name: Deploy 🚀
-        if: github.ref == 'refs/heads/master'
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
