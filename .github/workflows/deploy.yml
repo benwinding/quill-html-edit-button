@@ -1,8 +1,7 @@
 on:
   push:
-    paths:
-      - "src/quill*"
-      - "src/styles*"
+    branches:
+      - master
 
 name: Build and Publish
 jobs:
@@ -27,7 +26,6 @@ jobs:
       - name: Build Library
         run: npm run-script build
       - name: Publish
-        if: github.ref == 'refs/heads/master'
         uses: mikeal/merge-release@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
