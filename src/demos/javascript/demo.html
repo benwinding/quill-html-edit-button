@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Quill Demo (javascript)</title>
+
+    <!-- Theme included stylesheets -->
+    <link href="/static/favicon.ico" rel="icon" type="image/x-icon" />
+    <link
+      href="https://cdn.quilljs.com/1.3.6/quill.snow.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/github.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
+    <script
+      charset="UTF-8"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/languages/xml.min.js"
+    ></script>
+  </head>
+
+  <body>
+    <h3>Quill Demo (javascript)</h3>
+    <!-- Create the editor container -->
+    <div id="editor">
+      <p>Select the HTML button from the toolbar</p>
+      <p><br /></p>
+      <p>Try editing this sentence!</p>
+    </div>
+
+    <script
+      src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Promise"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../../../dist/demo_js.min.js"></script>
+  </body>
+</html>

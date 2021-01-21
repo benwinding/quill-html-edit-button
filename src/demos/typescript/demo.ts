@@ -1,7 +1,9 @@
-import Quill from "quill";
-import { htmlEditButton } from "./quill.htmlEditButton";
-
-Quill.register("modules/htmlEditButton", htmlEditButton);
+/* 
+  Currently there's no types for quill modules, 
+  so you need to either make types, or use a js
+  file to import them (which is what setup.js is).
+*/
+import Quill from "./setup";
 
 const fullToolbarOptions = [
   [{ header: [1, 2, 3, false] }],

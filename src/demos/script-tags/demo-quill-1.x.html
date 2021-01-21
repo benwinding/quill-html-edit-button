@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Quill Demo</title>
+    <title>Quill Demo (script tag) Quill 1.x</title>
 
     <!-- Theme included stylesheets -->
     <link href="/static/favicon.ico" rel="icon" type="image/x-icon" />
@@ -24,7 +24,7 @@
   </head>
 
   <body>
-    <h3>Demo of quill-html-edit-button</h3>
+    <h3>Quill Demo (script tag) Quill 1.x</h3>
     <!-- Create the editor container -->
     <div id="editor">
       <p>Select the HTML button from the toolbar</p>
@@ -36,6 +36,30 @@
       src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Promise"
       crossorigin="anonymous"
     ></script>
-    <script src="../dist/demo.min.js"></script>
+    <script src="../../../dist/quill.htmlEditButton.min.js"></script>
+    <script>
+      Quill.register("modules/htmlEditButton", htmlEditButton);
+
+      const fullToolbarOptions = [
+        [{ header: [1, 2, 3, false] }],
+        ["bold", "italic"],
+        ["clean"],
+        ["image"],
+      ];
+
+      console.log("Demo loaded...");
+
+      var quill = new Quill("#editor", {
+        theme: "snow",
+        modules: {
+          toolbar: {
+            container: fullToolbarOptions,
+          },
+          htmlEditButton: {
+            syntax: true,
+          },
+        },
+      });
+    </script>
   </body>
 </html>
