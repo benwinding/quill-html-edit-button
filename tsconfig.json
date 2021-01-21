@@ -6,6 +6,8 @@
     "declaration": false,
     "module": "commonjs",
     "target": "es5",
+    "allowJs": true,
+    "checkJs": false,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,

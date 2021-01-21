@@ -13,20 +13,30 @@ Quill.js Module which allows you to quickly view/edit the HTML in the editor
 
 ![Demo](https://user-images.githubusercontent.com/664714/93285035-f7f44e80-f7a1-11ea-83c7-59e151c53c06.gif)
 
-- [Live Demo](https://benwinding.github.io/quill-html-edit-button/src/demo.html)
-- [Live Demo (using script tags)](https://benwinding.github.io/quill-html-edit-button/src/demo-script-tag.html)
-- [Live Demo With Tables! (quill-2.x)](https://benwinding.github.io/quill-html-edit-button/src/demo-script-tag-2.x.html)
+- [Live Demo (webpack javascript)](https://benwinding.github.io/quill-html-edit-button/src/demos/javascript/demo.html) - also > [Source Code](src/demos/javascript)
+
+- [Live Demo (webpack typescript)](https://benwinding.github.io/quill-html-edit-button/src/demos/typescript/demo.html) - also > [Source Code](src/demos/typescript)
+- [Live Demo (script tags quill-1.x)](https://benwinding.github.io/quill-html-edit-button/src/demos/script-tags/demo-quill-1.x.html) - also > [Source Code](src/demos/script-tags/demo-quill-1.x.html)
+- [Live Demo (script tags quill-2.x) With Tables!](https://benwinding.github.io/quill-html-edit-button/src/demos/script-tags/demo-quill-2.x.html) - also > [Source Code](src/demos/script-tags/demo-quill-2.x.html)
 
 ## Install
 
 `yarn add quill-html-edit-button`
 
-## Quickstart
+## Quickstart (Javascript)
 
 ``` js
-import { htmlEditButton } from "quill-html-edit-button";
+import Quill from 'quill/core';
+import Toolbar from 'quill/modules/toolbar';
+import Snow from 'quill/themes/snow';
 
-Quill.register("modules/htmlEditButton", htmlEditButton);
+import htmlEditButton from "quill-html-edit-button";
+
+Quill.register({
+  'modules/toolbar': Toolbar,
+  'themes/snow': Snow,
+  "modules/htmlEditButton": htmlEditButton
+})
 
 const quill = new Quill(editor, {
   // ...
@@ -37,20 +47,36 @@ const quill = new Quill(editor, {
 });
 ```
 
+## Quickstart (typescript)
+
+Due to Quill's implementation, typescript integration is not trivial:
+
+- Follow the demo example here [`src/demos/typescript/demo.ts`](src/demos/typescript/demo.ts)
+- The file [`setup.js`](src/demos/typescript/setup.js`) is to use the library without types (as they aren't implemented with quill modules).
+- Your `tsconfig.json` needs the following properties, to prevent errors:
+``` json
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": false
+  }
+```
+
+
 ## Quickstart (script tag)
 
 ``` html
-    <script src="/dist/quill.htmlEditButton.min.js"></script>
-    <script>
-      Quill.register("modules/htmlEditButton", htmlEditButton);
-      const quill = new Quill(editor, {
-        // ...
-        modules: {
-          // ...
-          htmlEditButton: {}
-        }
-      });
-    </script>
+<script src="https://unpkg.com/quill@1.3.7/dist/quill.js"></script>
+<script src="https://unpkg.com/quill-html-edit-button@2.1.0/dist/quill.htmlEditButton.min.js"></script>
+<script>
+  Quill.register("modules/htmlEditButton", htmlEditButton);
+  const quill = new Quill(editor, {
+    // ...
+    modules: {
+      // ...
+      htmlEditButton: {}
+    }
+  });
+</script>
 ```
 
 ## Options
@@ -90,7 +116,7 @@ By default syntax highlighting is off, if you want to enable it use `syntax: tru
 
 Alternatively, include these scripts in your package bundler, as long as highlightjs is available in the global space at `window.hljs`.
 
-## Customising The Editor
+## Customising The HTML Editor
 The editor itself is actually a Quill Editor instance too! So you can pass in custom modules like this:
 
 ``` ts

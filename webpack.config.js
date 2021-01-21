@@ -1,13 +1,14 @@
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
 
-const isProd = process.argv.includes('production');
+const isProd = process.argv.includes("production");
 
 module.exports = [
   {
     entry: {
-      demo: "./src/demo.ts",
       "quill.htmlEditButton": "./src/quill.htmlEditButton.ts",
+      demo_js: "./src/demos/javascript/demo.js",
+      demo_ts: "./src/demos/typescript/demo.ts",
     },
     output: {
       filename: "[name].min.js",
@@ -17,9 +18,6 @@ module.exports = [
     },
     devServer: {
       contentBase: "./src",
-    },
-    externals: {
-      quill: "quill",
     },
     devtool: isProd ? "source-map" : "inline-source-map",
     optimization: {
@@ -56,6 +54,17 @@ module.exports = [
           use: {
             loader: "babel-loader",
           },
+        },
+        {
+          test: /\.svg$/,
+          use: [
+            {
+              loader: "html-loader",
+              options: {
+                minimize: true,
+              },
+            },
+          ],
         },
       ],
     },
