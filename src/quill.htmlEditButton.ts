@@ -39,7 +39,7 @@ class htmlEditButton {
     let toolbarEl = toolbarModule.container;
     const buttonContainer = $create("span");
     $setAttr(buttonContainer, "class", "ql-formats");
-    const button = $create("button");
+    const button = $create("button") as HTMLButtonElement;
     button.innerHTML = options.buttonHTML || "&lt;&gt;";
     button.title = options.buttonTitle || "Show HTML source";
     button.type = "button";
