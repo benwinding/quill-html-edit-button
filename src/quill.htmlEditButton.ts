@@ -42,6 +42,7 @@ class htmlEditButton {
     const button = $create("button");
     button.innerHTML = options.buttonHTML || "&lt;&gt;";
     button.title = options.buttonTitle || "Show HTML source";
+    button.type = "button";
     button.onclick = function (e) {
       e.preventDefault();
       launchPopupEditor(quill, options);
