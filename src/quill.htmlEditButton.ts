@@ -43,9 +43,12 @@ class htmlEditButton {
     button.innerHTML = options.buttonHTML || "&lt;&gt;";
     button.title = options.buttonTitle || "Show HTML source";
     button.type = "button";
+    const onSave = (html: string) => {
+      quill.clipboard.dangerouslyPasteHTML(html);
+    };
     button.onclick = function (e) {
       e.preventDefault();
-      launchPopupEditor(quill, options);
+      launchPopupEditor(quill, options, onSave);
     };
     buttonContainer.appendChild(button);
     toolbarEl.appendChild(buttonContainer);
@@ -66,7 +69,8 @@ class htmlEditButton {
 
 function launchPopupEditor(
   quill: Quill & any,
-  options: QuillHtmlEditButtonOptions
+  options: QuillHtmlEditButtonOptions,
+  saveCallback: (html: string) => void
 ) {
   const htmlFromEditor = quill.container.querySelector(".ql-editor").innerHTML;
   const popupContainer = $create("div");
@@ -150,15 +154,14 @@ function launchPopupEditor(
     const noNewlines = output
       .replace(/\s+/g, " ") // convert multiple spaces to a single space. This is how HTML treats them
       .replace(/(<[^\/<>]+>)\s+/g, "$1") // remove spaces after the start of a new tag
-      .replace(/>\s+|\s+</g, m => m.trim()) // remove spaces between starting and ending tags
+      .replace(/>\s+|\s+</g, (m) => m.trim()) // remove spaces between starting and ending tags
       .replace(/<\/(p|ol|ul)>\s/g, "</$1>") // remove spaces after the end of lists and paragraphs, they tend to break quill
       .replace(/\s<(p|ol|ul)>/g, "<$1>") // remove spaces before the start of lists and paragraphs, they tend to break quill
       .replace(/<\/li>\s<li>/g, "</li><li>") // remove spaces between list items, they tend to break quill
       .replace(/\s<\//g, "</") // remove spaces before the end of tags
       .replace(/(<[^\/<>]+>)\s(<[^\/<>]+>)/g, "$1$2") // remove space between multiple starting tags
       .trim();
-    quill.container.querySelector(".ql-editor").innerHTML = noNewlines;
-
+    saveCallback(noNewlines);
     if (prependSelector) {
       prependSelector.removeChild(overlayContainer);
     } else {
