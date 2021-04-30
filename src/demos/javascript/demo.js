@@ -11,7 +11,6 @@ Quill.register({
   "modules/htmlEditButton": htmlEditButton
 })
 
-
 const fullToolbarOptions = [
   [{ header: [1, 2, 3, false] }],
   ["bold", "italic"],

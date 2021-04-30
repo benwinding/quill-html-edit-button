@@ -142,9 +142,10 @@ function launchPopupEditor(
   buttonOk.onclick = function () {
     const container = (editor as any).container as HTMLElement;
     const qlElement = container.querySelector(".ql-editor") as HTMLDivElement;
-    const output = qlElement.innerText;
-    const noNewlines = OutputHTMLParser(output);
-    saveCallback(noNewlines);
+    const htmlInputFromPopup = qlElement.innerText;
+    const htmlOutputFormatted = OutputHTMLParser(htmlInputFromPopup);
+    console.log('OutputHTMLParser', { htmlInputFromPopup, htmlOutputFormatted })
+    saveCallback(htmlOutputFormatted);
     if (prependSelector) {
       prependSelector.removeChild(overlayContainer);
     } else {
