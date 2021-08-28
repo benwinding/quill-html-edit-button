@@ -65,7 +65,7 @@ Due to Quill's implementation, typescript integration is not trivial:
 
 ``` html
 <script src="https://unpkg.com/quill@1.3.7/dist/quill.js"></script>
-<script src="https://unpkg.com/quill-html-edit-button@2.1.0/dist/quill.htmlEditButton.min.js"></script>
+<script src="https://unpkg.com/quill-html-edit-button@2.2.7/dist/quill.htmlEditButton.min.js"></script>
 <script>
   Quill.register("modules/htmlEditButton", htmlEditButton);
   const quill = new Quill(editor, {
