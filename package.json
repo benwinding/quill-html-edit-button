@@ -3,17 +3,27 @@
   "description": "A Quill rich text editor Module which adds an html edit button to the quill editor",
   "version": "0.0.0",
   "main": "dist/quill.htmlEditButton.min.js",
+  "types": "types",
   "repository": "https://github.com/benwinding/quill-html-edit-button",
   "author": "Ben Winding <ben.winding@gmail.com>",
   "license": "MIT",
   "scripts": {
     "watch": "webpack --watch --progress",
-    "start": "webpack --mode development && webpack-dev-server --mode development --hot --port 8001",
-    "build": "webpack --mode production",
+    "start": "webpack-dev-server --mode development --hot --port 8001",
+    "build": "webpack --mode production && yarn build-types",
+    "build-types": "tsc --declaration --emitDeclarationOnly",
     "test": "jest",
     "test-watch": "jest --watch-all",
     "clean": "rm -rf dist/"
   },
+  "files": [
+    ".gitignore",
+    "LICENSE",
+    "dist",
+    "!dist/demo_*",
+    "types",
+    "!types/demos/**/*"
+  ],
   "keywords": [
     "quill",
     "quilljs",
