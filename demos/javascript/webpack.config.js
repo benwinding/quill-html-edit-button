@@ -7,7 +7,7 @@ const isProd = process.argv.includes("production");
 
 module.exports = {
   entry: {
-    index: "./src/index.ts",
+    index: "./src/index.js",
   },
   output: {
     filename: "[name].min.js",

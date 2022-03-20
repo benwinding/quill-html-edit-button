@@ -1,4 +1,4 @@
-import htmlEditButton from "../../quill.htmlEditButton";
+import htmlEditButton from "../../../src/quill.htmlEditButton";
 
 import Quill from 'quill/core';
 

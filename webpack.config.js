@@ -7,8 +7,6 @@ module.exports = [
   {
     entry: {
       "quill.htmlEditButton": "./src/quill.htmlEditButton.ts",
-      demo_js: "./src/demos/javascript/demo.js",
-      demo_ts: "./src/demos/typescript/demo.ts",
     },
     output: {
       filename: "[name].min.js",
