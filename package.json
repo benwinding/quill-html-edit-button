@@ -20,10 +20,9 @@
   "files": [
     ".gitignore",
     "LICENSE",
+    "README.md",
     "dist",
-    "!dist/demo_*",
-    "types",
-    "!types/demos/**/*"
+    "types"
   ],
   "keywords": [
     "quill",
