@@ -6,7 +6,6 @@ on:
 name: Build and Publish
 jobs:
   demo:
-    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
