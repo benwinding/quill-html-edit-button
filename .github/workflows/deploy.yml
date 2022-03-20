@@ -52,15 +52,13 @@ jobs:
         run: npm install
       - name: Build demo folder
         run: |
-          npm run-script build
-          mkdir demo
-          cp -r dist demo/dist
-          cp -r src demo/src
-          find ./demo
+          cd demos
+          ./build.sh
+          find ./demos/dist
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: demo
+          FOLDER: demos/dist
           CLEAN: true
