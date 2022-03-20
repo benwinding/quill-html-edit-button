@@ -1,0 +1,18 @@
+{
+  "name": "typescript",
+  "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack serve --mode development --hot",
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "@webpack-cli/serve": "^1.6.1",
+    "copy-webpack-plugin": "4.x",
+    "webpack-cli": "4.x",
+    "webpack": "4.x",
+    "write-file-webpack-plugin": "^4.5.1"
+  }
+}
