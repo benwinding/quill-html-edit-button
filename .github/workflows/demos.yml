@@ -1,14 +1,12 @@
 on:
   push:
-    paths:
-      - 'src'
     branches:
       - master
 
 name: Build and Publish
 jobs:
-  build:
-    name: Deploy Library
+  demo:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -25,12 +23,17 @@ jobs:
       - name: Install Dependencies
         if: steps.cache-modules.outputs.cache-hit != 'true'
         run: npm install
-      - name: Test Library
-        run: npm run-script test
-      - name: Build Library
-        run: npm run-script build
-      - name: Publish
-        uses: mikeal/merge-release@master
-        env:
+      - name: Build lib
+        run: npm run build
+      - name: Build demo folder
+        run: |
+          cd demos
+          ./build.sh
+          find ./dist
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: demos/dist
+          CLEAN: true
