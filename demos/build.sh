@@ -5,6 +5,8 @@ mkdir dist
 
 # Common Header
 cp ./header-text.js ./dist
+# Demo list
+cp ./demos-index.html ./dist/index.html
 
 # Build typescript
 cd typescript

@@ -25,8 +25,7 @@ const corner = document.createElement('div');
 corner.innerHTML = cornerHTML;
 
 // Add to DOM after first JS frame
-
-setTimeout(() => {
+window.addEventListener('load', function() {
   document.body.prepend(header);
   document.body.prepend(corner);
 })
