@@ -23,3 +23,10 @@ rm -rf ./dist
 mkdir ../dist/script-tags
 cp -r ./* ../dist/script-tags
 cd ..
+
+# Build vue
+cd vue
+rm -rf ./dist
+yarn && yarn build
+cp -r ./dist ../dist/vue
+cd ..

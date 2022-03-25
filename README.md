@@ -15,6 +15,7 @@ Quill.js Module which allows you to quickly view/edit the HTML in the editor
 
 - [Live Demo (webpack javascript)](https://benwinding.github.io/quill-html-edit-button/javascript/) - also > [Source Code](https://github.com/benwinding/quill-html-edit-button/tree/master/demos/javascript)
 - [Live Demo (webpack typescript)](https://benwinding.github.io/quill-html-edit-button/typescript/) - also > [Source Code](https://github.com/benwinding/quill-html-edit-button/tree/master/demos/typescript)
+- [Live Demo (webpack vue)](https://benwinding.github.io/quill-html-edit-button/vue/) - also > [Source Code](https://github.com/benwinding/quill-html-edit-button/tree/master/demos/vue)
 - [Live Demo (script tags quill-1.x)](https://benwinding.github.io/quill-html-edit-button/script-tags/demo-quill-1.x.html) - also > [Source Code](https://github.com/benwinding/quill-html-edit-button/tree/master/demos/script-tags/demo-quill-1.x.html)
 - [Live Demo (script tags quill-2.x) With Tables!](https://benwinding.github.io/quill-html-edit-button/script-tags/demo-quill-2.x.html) - also > [Source Code](https://github.com/benwinding/quill-html-edit-button/tree/master/demos/script-tags/demo-quill-2.x.html)
 

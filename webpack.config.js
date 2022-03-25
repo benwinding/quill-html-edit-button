@@ -1,5 +1,6 @@
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
+const { VueLoaderPlugin } = require('vue-loader')
 
 const isProd = process.argv.includes("production");
 
@@ -37,8 +38,15 @@ module.exports = [
       ],
     },
     resolve: {
-      extensions: [".ts", ".js"],
+      extensions: [ '.tsx', '.ts', '.js', '.vue' ],
+      alias: {
+          'vue': '@vue/runtime-dom'
+      }
     },
+    plugins: [
+      // make sure to include the plugin!
+      new VueLoaderPlugin()
+    ],
     module: {
       rules: [
         { test: /\.ts$/, use: ["ts-loader"], exclude: /node_modules/ },
@@ -54,6 +62,10 @@ module.exports = [
           },
         },
         {
+          test: /\.vue$/,
+          loader: "vue-loader",
+        },
+        {
           test: /\.svg$/,
           use: [
             {
@@ -66,5 +78,5 @@ module.exports = [
         },
       ],
     },
-  },
+  },  
 ];
