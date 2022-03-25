@@ -9,9 +9,8 @@
     "build": "webpack"
   },
   "devDependencies": {
-    "@vueup/vue-quill": "^1.0.0-alpha.1",
+    "@vueup/vue-quill": "^1.0.0-beta.8",
     "@webpack-cli/serve": "^1.6.1",
-    "quill-blot-formatter": "^1.0.5",
     "vue": "^3.2.31",
     "vue-loader": "^17.0.0",
     "vue-template-compiler": "^2.6.14",

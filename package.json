@@ -9,7 +9,6 @@
   "license": "MIT",
   "scripts": {
     "watch": "webpack --watch --progress",
-    "start": "webpack-dev-server --mode development --hot --port 8001",
     "build": "yarn build-lib && yarn build-types",
     "build-lib": "webpack --mode production",
     "build-types": "tsc --declaration --emitDeclarationOnly",

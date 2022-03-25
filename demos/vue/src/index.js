@@ -1,11 +1,7 @@
 import { createApp } from 'vue'
+import App from './App.vue'
 
-const app = createApp({
-  data() {
-    return {
-      count: 0
-    }
-  }
-})
+import '@vueup/vue-quill/dist/vue-quill.bubble.css'
+import '@vueup/vue-quill/dist/vue-quill.snow.css'
 
-app.mount('#app')
+createApp(App).mount('#app')
