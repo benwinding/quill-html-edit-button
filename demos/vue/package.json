@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack serve --mode development --hot",
-    "build": "webpack"
+    "build": "webpack --mode production"
   },
   "devDependencies": {
     "@vueup/vue-quill": "^1.0.0-beta.8",
