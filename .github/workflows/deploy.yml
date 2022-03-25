@@ -5,7 +5,7 @@ on:
     branches:
       - master
 
-name: Build and Publish
+name: Build and Publish Library
 jobs:
   build:
     name: Deploy Library

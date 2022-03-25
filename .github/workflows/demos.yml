@@ -3,16 +3,16 @@ on:
     branches:
       - master
 
-name: Build and Publish
+name: Build and Publish Demos
 jobs:
   demo:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: Use Node.js 10.17
+      - name: Use Node.js 12.22
         uses: actions/setup-node@v1
         with:
-          node-version: 10.17
+          node-version: 12.22
       - name: Cache node_modules
         id: cache-modules
         uses: actions/cache@v1
