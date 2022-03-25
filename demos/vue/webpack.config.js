@@ -33,16 +33,7 @@ module.exports = {
     minimizer: [
       new TerserPlugin({
         extractComments: true,
-        cache: true,
         parallel: true,
-        sourceMap: true, // Must be set to true if using source-maps in production
-        terserOptions: {
-          // https://github.com/webpack-contrib/terser-webpack-plugin#terseroptions
-          extractComments: "all",
-          compress: {
-            drop_console: false,
-          },
-        },
       }),
     ],
   },
