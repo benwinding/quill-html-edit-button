@@ -16,7 +16,7 @@ const Logger = new QuillHtmlLogger();
 
 class htmlEditButton {
   constructor(quill: Quill, optionsInput: QuillHtmlEditButtonOptions) {
-    const options = optionsInput || {};
+    const options = optionsInput || {} as QuillHtmlEditButtonOptions;
     const debug = !!(options && options.debug);
     Logger.setDebug(debug);
     Logger.log("logging enabled");
