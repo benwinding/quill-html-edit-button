@@ -22,6 +22,7 @@ module.exports = {
     new WriteFilePlugin(),
     new CopyWebpackPlugin([
       { from: 'public', to: '.' },
+      { from: '../header-text.js', to: '.' },
     ]),
   ],
   devtool: isProd ? "source-map" : "inline-source-map",
