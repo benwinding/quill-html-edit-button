@@ -3,6 +3,9 @@
 rm -rf ./dist
 mkdir dist
 
+# Common Header
+cp ./header-text.js ./dist
+
 # Build typescript
 cd typescript
 rm -rf ./dist

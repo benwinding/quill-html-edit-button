@@ -23,6 +23,7 @@ module.exports = {
     new WriteFilePlugin(),
     new CopyWebpackPlugin([
       { from: 'public', to: '.' },
+      { from: '../header-text.js', to: '.' },
     ]),
     new VueLoaderPlugin(),
   ],
