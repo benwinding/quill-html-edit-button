@@ -1,3 +1,5 @@
-import { QuillHtmlEditButtonOptions } from "options";
+import { QuillHtmlEditButtonOptions } from "./options";
+import {htmlEditButton} from "./quill.htmlEditButton";
 
-export { QuillHtmlEditButtonOptions }
+export { QuillHtmlEditButtonOptions };
+export { htmlEditButton };
