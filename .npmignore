@@ -1,0 +1,13 @@
+.babelrc
+.github
+node_modules
+yarn.lock
+webpack.config.js
+tsconfig.json
+jest.config.js
+demos
+*.tgz
+
+!dist
+!types
+!src

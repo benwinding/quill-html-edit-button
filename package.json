@@ -16,13 +16,6 @@
     "test-watch": "jest --watch-all",
     "clean": "rm -rf dist/"
   },
-  "files": [
-    ".gitignore",
-    "LICENSE",
-    "README.md",
-    "dist",
-    "types"
-  ],
   "keywords": [
     "quill",
     "quilljs",
