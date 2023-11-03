@@ -1,7 +1,6 @@
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const WriteFilePlugin = require('write-file-webpack-plugin');
 
 const isProd = process.argv.includes("production");
 
@@ -17,9 +16,14 @@ module.exports = {
   },
   devServer: {
     port: 8001,
+    static: {
+      directory: path.resolve(__dirname, "dist"),
+    },
+    devMiddleware: {
+      writeToDisk: true,
+    },
   },
   plugins: [
-    new WriteFilePlugin(),
     new CopyWebpackPlugin([
       { from: 'public', to: '.' },
       { from: '../header-text.js', to: '.' },

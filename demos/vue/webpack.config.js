@@ -1,7 +1,6 @@
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const WriteFilePlugin = require('write-file-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 
 const isProd = process.argv.includes("production");
@@ -14,13 +13,15 @@ module.exports = {
     filename: "[name].min.js",
     libraryTarget: "umd",
     path: path.resolve(__dirname, "dist"),
-    publicPath: "/dist",
   },
   devServer: {
     port: 8001,
+    hot: true,
+    devMiddleware: {
+      writeToDisk: true,
+    },
   },
   plugins: [
-    new WriteFilePlugin(),
     new CopyWebpackPlugin([
       { from: 'public', to: '.' },
       { from: '../header-text.js', to: '.' },
@@ -70,6 +71,7 @@ module.exports = {
       },
       {
         test: /\.vue$/,
+        exclude: /node_modules/,
         loader: 'vue-loader'
       },
     ],
