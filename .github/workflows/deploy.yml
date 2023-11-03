@@ -27,7 +27,7 @@ jobs:
       - name: Build Library
         run: npm run-script build
       - name: Publish
-        uses: mikeal/merge-release@master
+        uses: Github-Actions-Community/merge-release@22d66d3f7750d57b2b8c05db6077205332527df8
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
