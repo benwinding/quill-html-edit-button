@@ -1,7 +1,5 @@
 on:
   push:
-    paths:
-      - 'src'
     branches:
       - master
 
