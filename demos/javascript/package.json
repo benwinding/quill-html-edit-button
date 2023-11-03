@@ -9,8 +9,9 @@
     "build": "webpack"
   },
   "devDependencies": {
-    "@webpack-cli/serve": "^1.6.1",
-    "webpack-cli": "4.x",
-    "webpack": "4.x"
+    "@webpack-cli/serve": "1.7.0",
+    "webpack-dev-server": "4.7.4",
+    "webpack-cli": "4.10.0",
+    "webpack": "4.44.1"
   }
 }
