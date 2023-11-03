@@ -12,10 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: Use Node.js 10.17
-        uses: actions/setup-node@v1
+      - uses: actions/setup-node@v1
         with:
-          node-version: 10.17
+          node-version: 16.14.2
       - name: Cache node_modules
         id: cache-modules
         uses: actions/cache@v1
