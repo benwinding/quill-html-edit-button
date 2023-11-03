@@ -1,3 +1,4 @@
+// prettier-ignore
 export interface QuillHtmlEditButtonOptions {
   // Flags
   debug?: boolean;              // default:  false 

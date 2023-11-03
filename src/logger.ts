@@ -3,7 +3,7 @@ export class QuillHtmlLogger {
 
   setDebug(debug: boolean) {
     this.debug = debug;
-  }  
+  }
 
   prefixString() {
     return `</> quill-html-edit-button: `;

@@ -1,7 +1,10 @@
-import { QuillHtmlLogger } from './logger';
+import { QuillHtmlLogger } from "./logger";
 
 // Adapted FROM jsfiddle here: https://jsfiddle.net/buksy/rxucg1gd/
-export function FormatHTMLStringIndentation(code: string, logger: QuillHtmlLogger) {
+export function FormatHTMLStringIndentation(
+  code: string,
+  logger: QuillHtmlLogger,
+) {
   "use strict";
   let stripWhiteSpaces = true;
   let stripEmptyLines = true;
@@ -66,4 +69,3 @@ export function FormatHTMLStringIndentation(code: string, logger: QuillHtmlLogge
   });
   return result;
 }
-

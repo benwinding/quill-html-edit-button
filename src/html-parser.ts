@@ -11,7 +11,7 @@ export function OutputHTMLParser(inputHtmlFromQuillPopup: string): string {
       PreserveNewlinesBr,
       PreserveNewlinesPTags,
     ],
-    inputHtmlFromQuillPopup
+    inputHtmlFromQuillPopup,
   );
 }
 
@@ -29,12 +29,12 @@ export function PreserveNewlinesPTags(input: string): string {
 
 export function FixTagSpaceOpenTag(input: string): string {
   // Open tag remove space on inside
-  return input.replace(/(<(?!\/)[\w=\."'\s]*>) /g, "$1"); 
+  return input.replace(/(<(?!\/)[\w=\."'\s]*>) /g, "$1");
 }
 
 export function FixTagSpaceCloseTag(input: string): string {
   // Close tag remove space on inside
-  return input.replace(/ (<\/[\w]+>)/g, "$1"); 
+  return input.replace(/ (<\/[\w]+>)/g, "$1");
 }
 
 export function Compose<T>(functions: Array<(input: T) => T>, input: T): T {

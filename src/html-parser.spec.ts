@@ -9,18 +9,18 @@ import {
 describe("html parser multiple spaces converted to single", () => {
   test("space on right of tag", () => {
     expect(ConvertMultipleSpacesToSingle("<a>OKAY</a>    ")).toBe(
-      "<a>OKAY</a>"
+      "<a>OKAY</a>",
     );
   });
   test("new lines on right", () => {
     expect(
       ConvertMultipleSpacesToSingle(`<a>OKAY</a>   
-    `)
+    `),
     ).toBe("<a>OKAY</a>");
   });
   test("<a> spaces between", () => {
     expect(ConvertMultipleSpacesToSingle("<a>11</a>    <a>22</a>")).toBe(
-      "<a>11</a> <a>22</a>"
+      "<a>11</a> <a>22</a>",
     );
   });
 });

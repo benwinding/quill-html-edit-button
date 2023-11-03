@@ -1,4 +1,4 @@
-import { QuillHtmlLogger } from './logger';
+import { QuillHtmlLogger } from "./logger";
 import "./styles.css";
 import Quill from "quill";
 import { QuillHtmlEditButtonOptions } from "./options";
@@ -16,7 +16,7 @@ const Logger = new QuillHtmlLogger();
 
 class htmlEditButton {
   constructor(quill: Quill, optionsInput: QuillHtmlEditButtonOptions) {
-    const options = optionsInput || {} as QuillHtmlEditButtonOptions;
+    const options = optionsInput || ({} as QuillHtmlEditButtonOptions);
     const debug = !!(options && options.debug);
     Logger.setDebug(debug);
     Logger.log("logging enabled");
@@ -24,7 +24,7 @@ class htmlEditButton {
     const toolbarModule = quill.getModule("toolbar");
     if (!toolbarModule) {
       throw new Error(
-        'quill.htmlEditButton requires the "toolbar" module to be included too'
+        'quill.htmlEditButton requires the "toolbar" module to be included too',
       );
     }
     this.registerDivModule();
@@ -62,7 +62,7 @@ class htmlEditButton {
 function launchPopupEditor(
   quill: Quill & any,
   options: QuillHtmlEditButtonOptions,
-  saveCallback: (html: string) => void
+  saveCallback: (html: string) => void,
 ) {
   const htmlFromEditor = quill.container.querySelector(".ql-editor").innerHTML;
   const popupContainer = $create("div");
@@ -144,7 +144,7 @@ function launchPopupEditor(
     const qlElement = container.querySelector(".ql-editor") as HTMLDivElement;
     const htmlInputFromPopup = qlElement.innerText;
     const htmlOutputFormatted = OutputHTMLParser(htmlInputFromPopup);
-    Logger.log('OutputHTMLParser', { htmlInputFromPopup, htmlOutputFormatted })
+    Logger.log("OutputHTMLParser", { htmlInputFromPopup, htmlOutputFormatted });
     saveCallback(htmlOutputFormatted);
     if (prependSelector) {
       prependSelector.removeChild(overlayContainer);
