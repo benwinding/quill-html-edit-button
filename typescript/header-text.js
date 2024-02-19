@@ -1,5 +1,7 @@
 const demoTitle = document.title;
-const demoSourceCodeLink = document.getElementById('src-code').getAttribute('data');
+const demoSourceCodeLink = document
+  .getElementById("src-code")
+  .getAttribute("data");
 
 // HEADER TEXT
 const headerHtml = `<div style="width: 100%; display: flex; align-items: center;">
@@ -9,7 +11,7 @@ const headerHtml = `<div style="width: 100%; display: flex; align-items: center;
 <a href="${demoSourceCodeLink}" style="flex-grow: 1; text-align: right; color: grey; padding-right: 50px;"><h4>Demo Source Code</h4></a>
 </div>
 `;
-const header = document.createElement('div');
+const header = document.createElement("div");
 header.innerHTML = headerHtml;
 
 // GITHUB CORNER
@@ -21,11 +23,11 @@ const cornerHTML = `<a href="${demoSourceCodeLink}" class="github-corner" aria-l
 <style>
   .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
 </style>`;
-const corner = document.createElement('div');
+const corner = document.createElement("div");
 corner.innerHTML = cornerHTML;
 
 // Add to DOM after first JS frame
-window.addEventListener('load', function() {
+window.addEventListener("load", function () {
   document.body.prepend(header);
   document.body.prepend(corner);
-})
+});
