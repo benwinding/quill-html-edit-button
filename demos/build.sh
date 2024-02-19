@@ -35,3 +35,10 @@ rm -rf ./dist
 yarn && yarn build
 cp -r ./dist ../dist/vue
 cd ..
+
+# Build vue
+cd react
+rm -rf ./dist
+yarn && yarn build
+cp -r ./dist ../dist/react
+cd ..
