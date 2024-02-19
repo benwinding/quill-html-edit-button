@@ -22,8 +22,8 @@ module.exports = {
   },
   plugins: [
     new CopyWebpackPlugin([
-      { from: 'public', to: '.' },
-      { from: '../header-text.js', to: '.' },
+      { from: "public", to: "." },
+      { from: "../header-text.js", to: "." },
     ]),
   ],
   devtool: isProd ? "source-map" : "inline-source-map",
@@ -37,7 +37,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts'],
+    extensions: [".js", ".jsx", ".ts"],
   },
   module: {
     rules: [

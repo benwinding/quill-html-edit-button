@@ -1,7 +1,7 @@
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const { VueLoaderPlugin } = require('vue-loader');
+const { VueLoaderPlugin } = require("vue-loader");
 
 const isProd = process.argv.includes("production");
 
@@ -23,8 +23,8 @@ module.exports = {
   },
   plugins: [
     new CopyWebpackPlugin([
-      { from: 'public', to: '.' },
-      { from: '../header-text.js', to: '.' },
+      { from: "public", to: "." },
+      { from: "../header-text.js", to: "." },
     ]),
     new VueLoaderPlugin(),
   ],
@@ -72,7 +72,7 @@ module.exports = {
       {
         test: /\.vue$/,
         exclude: /node_modules/,
-        loader: 'vue-loader'
+        loader: "vue-loader",
       },
     ],
   },
