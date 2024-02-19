@@ -1,0 +1,21 @@
+{
+  "name": "javascript",
+  "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack serve --mode development --hot",
+    "build": "webpack --mode production"
+  },
+  "devDependencies": {
+    "react-quill": "2.0.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "babel-loader": "9.1.3",
+    "@babel/preset-react": "7.23.3",
+    "webpack": "5.89.0",
+    "webpack-cli": "4.10.0",
+    "webpack-dev-server": "4.15.1"
+  }
+}
