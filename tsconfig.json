@@ -11,6 +11,7 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    "skipLibCheck": true,
     "outDir": "types",
     "lib": ["es2017", "dom"]
   },

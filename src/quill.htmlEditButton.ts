@@ -4,6 +4,7 @@ import Quill from "quill";
 import { QuillHtmlEditButtonOptions } from "./options";
 import { OutputHTMLParser } from "./html-parser";
 import { FormatHTMLStringIndentation } from "./html-formatter";
+import { default as Toolbar } from "quill/modules/toolbar";
 
 function $create(elName: string) {
   return document.createElement(elName);
@@ -21,13 +22,13 @@ class htmlEditButton {
     Logger.setDebug(debug);
     Logger.log("logging enabled");
     // Add button to all quill toolbar instances
-    const toolbarModule = quill.getModule("toolbar");
+    const toolbarModule = quill.getModule("toolbar") as Toolbar;
     if (!toolbarModule) {
       throw new Error(
         'quill.htmlEditButton requires the "toolbar" module to be included too',
       );
     }
-    this.registerDivModule();
+    // this.registerDivModule();
     let toolbarEl = toolbarModule.container;
     const buttonContainer = $create("span");
     $setAttr(buttonContainer, "class", "ql-formats");
@@ -43,19 +44,7 @@ class htmlEditButton {
       launchPopupEditor(quill, options, onSave);
     };
     buttonContainer.appendChild(button);
-    toolbarEl.appendChild(buttonContainer);
-  }
-
-  registerDivModule() {
-    // To allow divs to be inserted into html editor
-    // obtained from issue: https://github.com/quilljs/quill/issues/2040
-    const Block = Quill.import("blots/block");
-    class Div extends Block {}
-    Div.tagName = "div";
-    Div.blotName = "div";
-    Div.allowedChildren = Block.allowedChildren;
-    Div.allowedChildren.push(Block);
-    Quill.register(Div);
+    toolbarEl?.appendChild(buttonContainer);
   }
 }
 
