@@ -6,6 +6,7 @@
 [![License](https://img.shields.io/npm/l/quill-html-edit-button.svg)](https://github.com/benwinding/quill-html-edit-button/blob/master/LICENSE)
 [![Downloads/week](https://img.shields.io/npm/dm/quill-html-edit-button.svg)](https://www.npmjs.com/package/quill-html-edit-button)
 [![Github Issues](https://img.shields.io/github/issues/benwinding/quill-html-edit-button.svg)](https://github.com/benwinding/quill-html-edit-button)
+![Build and Publish](https://github.com/benwinding/quill-html-edit-button/actions/workflows/deploy.yml/badge.svg)
 
 <!-- [END badges] -->
 

@@ -9,36 +9,25 @@ cp ./header-text.js ./dist
 cp ./demos-index.html ./dist/index.html
 
 # Build typescript
-cd typescript
-rm -rf ./dist
-yarn && yarn build
-cp -r ./dist ../dist/typescript
-cd .. 
+rm -rf ./typescript/dist
+yarn build:typescript
+cp -r ./typescript/dist ./dist/typescript
 
 # Build javascript
-cd javascript
-rm -rf ./dist
-yarn && yarn build
-cp -r ./dist ../dist/javascript
-cd ..
+rm -rf ./javascript/dist
+yarn build:javascript
+cp -r ./javascript/dist ./dist/javascript
 
-# Build script tags
-cd script-tags
-rm -rf ./dist
-mkdir ../dist/script-tags
-cp -r ./* ../dist/script-tags
-cd ..
+# Copy script tags
+mkdir ./dist/script-tags
+cp ./script-tags/* ./dist/script-tags
 
 # Build vue
-cd vue
-rm -rf ./dist
-yarn && yarn build
-cp -r ./dist ../dist/vue
-cd ..
+rm -rf ./vue/dist
+yarn build:vue
+cp -r ./vue/dist ./dist/vue
 
-# Build vue
-cd react
-rm -rf ./dist
-yarn && yarn build
-cp -r ./dist ../dist/react
-cd ..
+# Build react
+rm -rf ./react/dist
+yarn build:react
+cp -r ./react/dist ./dist/react

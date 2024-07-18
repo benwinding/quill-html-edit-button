@@ -10,6 +10,7 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    "skipLibCheck": true,
     "outDir": "dist",
     "lib": ["es2017", "dom"]
   },

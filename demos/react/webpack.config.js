@@ -4,6 +4,9 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const isProd = process.argv.includes("production");
 
+/**
+ * @type {import('webpack').Configuration}
+ */
 module.exports = {
   entry: {
     index: "./src/index.jsx",
@@ -20,11 +23,13 @@ module.exports = {
       writeToDisk: true,
     },
   },
-  plugins: [
-    new CopyWebpackPlugin([
-      { from: "public", to: "." },
-      { from: "../header-text.js", to: "." },
-    ]),
+  plugins: [    
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: "public", to: "." },
+        { from: "../header-text.js", to: "." },
+      ],
+    }),
   ],
   devtool: isProd ? "source-map" : "inline-source-map",
   optimization: {

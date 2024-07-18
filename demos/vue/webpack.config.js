@@ -5,6 +5,9 @@ const { VueLoaderPlugin } = require("vue-loader");
 
 const isProd = process.argv.includes("production");
 
+/**
+ * @type {import('webpack').Configuration}
+ */
 module.exports = {
   entry: {
     index: "./src/index.js",
@@ -22,10 +25,12 @@ module.exports = {
     },
   },
   plugins: [
-    new CopyWebpackPlugin([
-      { from: "public", to: "." },
-      { from: "../header-text.js", to: "." },
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: "public", to: "." },
+        { from: "../header-text.js", to: "." },
+      ],
+    }),
     new VueLoaderPlugin(),
   ],
   devtool: isProd ? "source-map" : "inline-source-map",
