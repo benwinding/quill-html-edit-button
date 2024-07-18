@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@master
       - uses: actions/setup-node@v1
         with:
-          node-version: 14.21.3
+          node-version: 20.12.1
       - name: Cache node_modules
         id: cache-modules
         uses: actions/cache@v1
@@ -22,11 +22,11 @@ jobs:
           key: ${{ runner.OS }}-build-${{ hashFiles('package.json') }}
       - name: Install Dependencies
         if: steps.cache-modules.outputs.cache-hit != 'true'
-        run: npm install
+        run: yarn
       - name: Test Library
-        run: npm run-script test
+        run: yarn test
       - name: Build Library
-        run: npm run-script build
+        run: yarn build
       - name: Publish
         uses: Github-Actions-Community/merge-release@22d66d3f7750d57b2b8c05db6077205332527df8
         env:

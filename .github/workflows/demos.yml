@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@master
       - uses: actions/setup-node@v1
         with:
-          node-version: 14.21.3
+          node-version: 20.12.1
       - name: Cache node_modules
         id: cache-modules
         uses: actions/cache@v1
@@ -20,12 +20,13 @@ jobs:
           key: ${{ runner.OS }}-build-${{ hashFiles('package.json') }}
       - name: Install Dependencies
         if: steps.cache-modules.outputs.cache-hit != 'true'
-        run: npm install
+        run: yarn
       - name: Build lib
-        run: npm run build
+        run: yarn build
       - name: Build demo folder
         run: |
           cd demos
+          yarn
           ./build.sh
           find ./dist
       - name: Deploy 🚀
