@@ -36,8 +36,10 @@ class htmlEditButton {
     button.innerHTML = options.buttonHTML || "&lt;&gt;";
     button.title = options.buttonTitle || "Show HTML source";
     button.type = "button";
+    const originalHtml = quill.root.innerHTML;
     const onSave = (html: string) => {
       quill.clipboard.dangerouslyPasteHTML(html);
+      quill.emitter.emit('text-change', html, originalHtml, 'user');
     };
     button.onclick = function (e) {
       e.preventDefault();
